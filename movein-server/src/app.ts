@@ -4,17 +4,16 @@ import bodyParser from "body-parser";
 import path from "path";
 import cors from "cors";
 import db from "./util/database";
+import authRoute from "./routes/auth";
+
 const app = express();
 const port = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-db.authenticate()
-  .then(() => {
-    console.log("DataBase connected");
-  })
-  .catch((err: any) => console.error(err));
+app.use(authRoute);
 
 app.get("/", (req, res) => {
   res.send("hello from my app");
