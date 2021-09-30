@@ -5,11 +5,11 @@ import User from "../models/User";
 
 const router = express.Router();
 
-router.get("/getRequirement/:userId", getRequirementForUser);
+// router.get("/getRequirement/:userId", getRequirementForUser);
 
-router.post("/addRequirement/:userId", addRequirementForUser);
+router.post("/addRequirement/:userId", [], addRequirementForUser);
 
-router.post("updateRequirement/:userId", updateRequirementForUser);
+// router.post("updateRequirement/:userId", updateRequirementForUser);
 
 router.post(
   "/signup",
