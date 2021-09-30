@@ -4,7 +4,7 @@ import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 import errorCode from "../errors/errorCode";
 import generalError from "../errors/generalError";
-import User from "../models/user";
+import User from "../models/User";
 
 export const signupUser = async (
   req: Request,
@@ -51,7 +51,7 @@ export const loginUser = async (
     }
     const token = jwt.sign(
       {
-        email: user.email,
+        userName: user.userName,
         userId: user.id,
       },
       "someSuperSecretSecret",
