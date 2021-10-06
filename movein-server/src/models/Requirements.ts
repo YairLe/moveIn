@@ -11,9 +11,10 @@ const Requirements = db.define("requirements", {
   userId: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    unique: true,
   },
   minPrice: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
     allowNull: false,
   },
   maxPrice: {
@@ -24,7 +25,7 @@ const Requirements = db.define("requirements", {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
-  committe: {
+  committee: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
@@ -34,7 +35,7 @@ const Requirements = db.define("requirements", {
   },
   neighborhood: {
     type: Sequelize.ARRAY(Sequelize.TEXT),
-    allowNull: false,
+    allowNull: true,
   },
   rooms: {
     type: Sequelize.INTEGER,
@@ -42,6 +43,14 @@ const Requirements = db.define("requirements", {
   },
   essentials: {
     type: Sequelize.ARRAY(Sequelize.TEXT),
+    allowNull: true,
+  },
+  createdAt: {
+    type: Sequelize.DATE,
+    allowNull: false,
+  },
+  updatedAt: {
+    type: Sequelize.DATE,
     allowNull: false,
   },
 });
