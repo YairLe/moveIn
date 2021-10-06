@@ -1,7 +1,4 @@
-export interface ErrorWithStatus extends Error {
-  statusCode: number;
-  data?: Array<{}>;
-}
+import { ErrorWithStatus } from "../interfaces/interfaces";
 
 const generalError = (errorMessage: string, errorCode: number) => {
   const error = new Error(errorMessage) as ErrorWithStatus;
