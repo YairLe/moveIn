@@ -40,7 +40,11 @@ export const loginUser = async (
 ) => {
   const { userName, password } = req.body;
   try {
-    const user = await User.findOne({ where: { userName: userName } });
+    const user = await User.findOne({
+      where: { userName: userName },
+      attributes: ["id", "userName", "password"],
+    });
+    console.log(user);
     if (!user) {
       throw generalError("A user with this email could not be found", 401);
     }

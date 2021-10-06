@@ -1,15 +1,12 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import generalError from "../errors/generalError";
+import { reqWithUser } from "../interfaces/interfaces";
 
 interface IDecodedToken {
   userId: string;
   iat: number;
   exp: number;
-}
-
-interface reqWithUser extends Request {
-  userId?: string;
 }
 
 const checkAuth = (req: reqWithUser, res: Response, next: NextFunction) => {

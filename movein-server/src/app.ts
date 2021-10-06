@@ -1,10 +1,11 @@
-import express from "express";
-// import exphbs=require('express-handlebars')
 import bodyParser from "body-parser";
-import path from "path";
 import cors from "cors";
-import db from "./util/database";
+import express from "express";
+import checkAuth from "./middleware/is-auth";
+import Requirements from "./models/Requirements";
+import User from "./models/User";
 import authRoute from "./routes/auth";
+import requirementsRoute from "./routes/requirements";
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -14,6 +15,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use(authRoute);
+app.use(checkAuth, requirementsRoute);
+
+User.hasOne(Requirements);
+Requirements.belongsTo(User);
 
 app.get("/", (req, res) => {
   res.send("hello from my app");
