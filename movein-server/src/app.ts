@@ -2,7 +2,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
 import checkAuth from "./middleware/is-auth";
-import Requirement from "./models/Requirements";
+import Requirements from "./models/Requirements";
 import User from "./models/User";
 import authRoute from "./routes/auth";
 import requirementsRoute from "./routes/requirements";
@@ -17,8 +17,8 @@ app.use(cors());
 app.use(authRoute);
 app.use(checkAuth, requirementsRoute);
 
-User.hasOne(Requirement, { foreignKey: "users_id_fkey" });
-Requirement.belongsTo(User);
+User.hasOne(Requirements);
+Requirements.belongsTo(User);
 
 app.get("/", (req, res) => {
   res.send("hello from my app");
