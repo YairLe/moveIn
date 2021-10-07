@@ -37,7 +37,11 @@ const Requirements = db.define("requirements", {
     type: Sequelize.ARRAY(Sequelize.TEXT),
     allowNull: true,
   },
-  rooms: {
+  minRooms: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+  maxRooms: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
