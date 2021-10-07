@@ -7,12 +7,13 @@ import {
 } from "../controllers/requirement";
 
 const validateKeys = [
-  body("minPrice").isNumeric(),
+  body("minPrice").isFloat({ min: 1 }),
   body("maxPrice").isNumeric(),
-  body("tax").isNumeric(),
-  body("committee").isNumeric(),
+  body("tax").isFloat({ min: 1 }),
+  body("committee").isFloat({ min: 1 }),
   body("city").isString(),
-  body("rooms").isNumeric(),
+  body("minRooms").isFloat({ min: 1 }),
+  body("maxRooms").isFloat(),
 ];
 
 const router = express.Router();
