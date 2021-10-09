@@ -1,13 +1,12 @@
 import React from "react";
 import logo from "./images/MoveIn.svg";
 import "./App.css";
+import Auth from "./components/Auth/Auth";
 
 function App() {
   return (
     <div>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
+      <Auth />
     </div>
   );
 }
