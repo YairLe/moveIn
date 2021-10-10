@@ -1,29 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../images/MoveIn.svg";
-import arrow from "../../images/Arrow.svg";
-import Login from "./Login";
+import ReturnButton from "../Button/ReturnButton";
 import styles from "./Auth.module.css";
+import Login from "./Login";
 import Signup from "./Signup";
-import Button from "../Button/Button";
 
 const Auth: React.FC = () => {
-  const isLoggedIn = false;
+  const [loginPage, setLoginPage] = useState(false);
+
+  const onSubmitFormHandler: React.FormEventHandler<HTMLFormElement> = (
+    event
+  ) => {
+    event.preventDefault();
+    if (loginPage) {
+    } else {
+    }
+  };
 
   return (
     <React.Fragment>
       <header className={styles.auth}>
-        <Button
-          buttonProp={{
-            className: styles.button,
-            onClick: () => {
-              console.log("click");
-            },
-          }}
-        />
+        {!loginPage && (
+          <ReturnButton
+            handleClick={() => {
+              setLoginPage(true);
+            }}
+          />
+        )}
 
         <img src={logo} className="App-logo" alt="logo" />
       </header>
-      {isLoggedIn ? <Login /> : <Signup />}
+      <form name="AuthForm" onSubmit={onSubmitFormHandler}>
+        {loginPage ? (
+          <Login setLoginPage={setLoginPage} />
+        ) : (
+          <Signup setLoginPage={setLoginPage} />
+        )}
+      </form>
     </React.Fragment>
   );
 };

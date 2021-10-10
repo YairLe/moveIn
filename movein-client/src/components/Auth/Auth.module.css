@@ -5,25 +5,3 @@
   justify-content: flex-end;
   flex-direction: column;
 }
-
-.button {
-  border: none;
-  background-color: transparent;
-  width: 100%;
-  height: 100%;
-  justify-content: flex-start;
-  margin-top: 0.5rem;
-  margin-left: 1.5rem;
-  border-radius: 4px;
-  background-image: url("../../images/Arrow.svg");
-  /* filter: url("../../images/Arrow.svg"); */
-  text-indent: -9999px;
-  width: 100px;
-  height: 82px;
-  background-repeat: no-repeat;
-  background-size: 100px 82px;
-  /* background-position: right 24px center; */
-}
-.button:hover {
-  fill: #ace63c;
-}

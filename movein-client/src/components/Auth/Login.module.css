@@ -35,7 +35,8 @@
 }
 
 .loginButton,
-.signButton {
+.signButton,
+.confirmSignButton {
   width: 50%;
   mix-blend-mode: normal;
   box-sizing: border-box;
@@ -52,9 +53,17 @@
   filter: drop-shadow(0px 5.575px 5.575px rgba(0, 0, 0, 0.25));
 }
 
+.signButton,
+.confirmSignButton {
+  border: 0.3rem solid rgba(34, 65, 74, 1);
+}
+
 .signButton {
-  background-color: #2e464d;
-  border: 0.3rem solid #000000;
+  background-color: #22758a;
+}
+
+.confirmSignButton {
+  background-color: transparent;
 }
 
 .h1 {
@@ -74,14 +83,20 @@
   justify-content: center;
 }
 
+.logh1,
 .signh1 {
-  font-family: "Raleway", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 2rem;
   line-height: 2rem;
+}
 
+.logh1 {
+  font-family: "Raleway", sans-serif;
   color: #f9f9f9;
+}
 
-  /* mix-blend-mode: normal; */
+.signh1 {
+  font-family: "Denk One", sans-serif;
+  color: rgba(34, 65, 74, 1);
 }

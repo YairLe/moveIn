@@ -4,8 +4,15 @@ import loginLogo from "../../images/LogIn.svg";
 import styles from "./Login.module.css";
 import Button from "../Button/Button";
 import InputAuth from "./InputAuth";
+import SignButton from "../Button/SignButton";
 
-const Login: React.FC = () => {
+interface IProps {
+  setLoginPage: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Login: React.FC<IProps> = (props: IProps) => {
+  const { setLoginPage } = props;
+
   return (
     <React.Fragment>
       <div className={styles.container}>
@@ -22,15 +29,14 @@ const Login: React.FC = () => {
         <div className={styles.divh1}>
           <h1 className={styles.h1}>Don't have an account?</h1>
         </div>
-        <div className={styles.loginButtonDiv}>
-          <Button
-            buttonProp={{
-              className: styles.signButton,
-            }}
-          >
-            <h1 className={styles.signh1}>Sign Up</h1>
-          </Button>
-        </div>
+        <SignButton
+          buttonDivStyle={styles.loginButtonDiv}
+          buttonStyle={styles.signButton}
+          handleClick={() => {
+            setLoginPage(false);
+          }}
+          h1Style={styles.logh1}
+        />
       </div>
     </React.Fragment>
   );
