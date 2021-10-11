@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useInput from "../../hooks/use-input";
 import SignButton from "../Button/SignButton";
 import Input from "../Input/Input";
@@ -10,6 +10,7 @@ interface IProps {
 }
 
 const Signup: React.FC<IProps> = (props: IProps) => {
+  const [formValid, setFormValid] = useState<boolean>(false);
   const { setLoginPage } = props;
   const {
     value: passwordConfirmation,
@@ -20,34 +21,57 @@ const Signup: React.FC<IProps> = (props: IProps) => {
     resetInputSettings: resetpasswordConfirmation,
   } = useInput((value: string) => value.trim().length >= 5);
 
+  const [handleFetch, setHandleFetch] = useState(false);
+
+  const canHandleForm = formValid && ispasswordConfirmationValid;
+
   return (
     <React.Fragment>
-      <InputAuth />
-      <div className={styles.inputDiv}>
-        <Input
-          labelStyle={styles.label}
-          label={"Confirm Password"}
-          inputInValid={!ispasswordConfirmationValid}
-          inputInValidText={"please confirm password"}
-          inputProp={{
-            type: "password",
-            className: styles.input,
-            id: "passwordConfirmation",
-            name: "passwordConfirmation",
-            value: passwordConfirmation,
-            onChange: setpasswordConfirmation,
-            onBlur: blurpasswordConfirmation,
-          }}
-        />
-      </div>
-      <SignButton
-        buttonDivStyle={styles.loginButtonDiv}
-        buttonStyle={styles.confirmSignButton}
-        handleClick={() => {
-          setLoginPage(false);
+      <form
+        name="AuthForm"
+        onSubmit={(event) => {
+          event.preventDefault();
+          setHandleFetch(true);
         }}
-        h1Style={styles.signh1}
-      />
+      >
+        <InputAuth
+          handleFetch={handleFetch}
+          setHandleFetch={setHandleFetch}
+          passwordConfirmation={passwordConfirmation}
+          setFormValid={setFormValid}
+          setLoginPage={setLoginPage}
+          resetpasswordConfirmation={resetpasswordConfirmation}
+        />
+        <div className={styles.inputDiv}>
+          <Input
+            labelStyle={styles.label}
+            label={"Confirm Password"}
+            inputInValid={!ispasswordConfirmationValid}
+            inputInValidText={"please confirm password"}
+            inputProp={{
+              type: "password",
+              className: notifyInvalidpasswordConfirmation
+                ? styles.inputInvalid
+                : styles.input,
+              id: "passwordConfirmation",
+              name: "passwordConfirmation",
+              value: passwordConfirmation,
+              onChange: setpasswordConfirmation,
+              onBlur: blurpasswordConfirmation,
+            }}
+          />
+        </div>
+        <SignButton
+          buttonDivStyle={styles.loginButtonDiv}
+          buttonStyle={styles.confirmSignButton}
+          handleClick={() => {
+            setLoginPage(false);
+          }}
+          buttonDisabled={!canHandleForm}
+          h1Style={styles.signh1}
+          buttonType="submit"
+        />
+      </form>
     </React.Fragment>
   );
 };
