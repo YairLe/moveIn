@@ -6,16 +6,27 @@ interface IProps {
   buttonStyle: any;
   h1Style: any;
   handleClick: Function;
+  buttonDisabled: boolean;
+  buttonType: "button" | "submit";
 }
 
 const SignButton: React.FC<IProps> = (props: IProps) => {
-  const { buttonStyle, buttonDivStyle, handleClick, h1Style } = props;
+  const {
+    buttonStyle,
+    buttonDivStyle,
+    handleClick,
+    h1Style,
+    buttonDisabled,
+    buttonType,
+  } = props;
   return (
     <div className={buttonDivStyle}>
       <Button
         buttonProp={{
           className: buttonStyle,
           onClick: () => handleClick(),
+          type: buttonType,
+          disabled: buttonDisabled,
         }}
       >
         <h1 className={h1Style}>Sign Up</h1>
