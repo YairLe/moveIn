@@ -8,15 +8,6 @@ import Signup from "./Signup";
 const Auth: React.FC = () => {
   const [loginPage, setLoginPage] = useState(false);
 
-  const onSubmitFormHandler: React.FormEventHandler<HTMLFormElement> = (
-    event
-  ) => {
-    event.preventDefault();
-    if (loginPage) {
-    } else {
-    }
-  };
-
   return (
     <React.Fragment>
       <header className={styles.auth}>
@@ -30,13 +21,12 @@ const Auth: React.FC = () => {
 
         <img src={logo} className="App-logo" alt="logo" />
       </header>
-      <form name="AuthForm" onSubmit={onSubmitFormHandler}>
-        {loginPage ? (
-          <Login setLoginPage={setLoginPage} />
-        ) : (
-          <Signup setLoginPage={setLoginPage} />
-        )}
-      </form>
+
+      {loginPage ? (
+        <Login setLoginPage={setLoginPage} />
+      ) : (
+        <Signup setLoginPage={setLoginPage} />
+      )}
     </React.Fragment>
   );
 };
