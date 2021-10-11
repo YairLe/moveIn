@@ -73,27 +73,27 @@ export const addRequirementForUser = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    const error = generalError("input error", 422);
-    error.data = errors.array();
-    throw error;
-  }
-
-  const userId = req.userId;
-  const {
-    minPrice,
-    maxPrice,
-    tax,
-    committee,
-    city,
-    minRooms,
-    maxRooms,
-    essentials,
-    neighborhood,
-  } = req.body;
-
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const error = generalError("input error", 422);
+      error.data = errors.array();
+      throw error;
+    }
+
+    const userId = req.userId;
+    const {
+      minPrice,
+      maxPrice,
+      tax,
+      committee,
+      city,
+      minRooms,
+      maxRooms,
+      essentials,
+      neighborhood,
+    } = req.body;
+
     const newRequirements = new Requirements({
       userId: userId,
       minPrice: minPrice,
