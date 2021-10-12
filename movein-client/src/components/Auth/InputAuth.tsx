@@ -5,22 +5,22 @@ import Input from "../Input/Input";
 import styles from "./Login.module.css";
 
 interface IProps {
-  handleFetch?: boolean;
-  setHandleFetch: Function;
+  handleFetch: boolean;
+  setHandleFetch: React.Dispatch<React.SetStateAction<boolean>>;
   passwordConfirmation?: string;
-  setFormValid: Function;
-  setLoginPage: React.Dispatch<React.SetStateAction<boolean>>;
+  setFormValid: React.Dispatch<React.SetStateAction<boolean>>;
   resetpasswordConfirmation?: Function;
+  loginPage: boolean;
 }
 
 const InputAuth: React.FC<IProps> = (props: IProps) => {
   const {
     handleFetch,
     setHandleFetch,
-    passwordConfirmation,
+    passwordConfirmation = "",
     setFormValid,
-    setLoginPage,
-    resetpasswordConfirmation,
+    resetpasswordConfirmation = () => {},
+    loginPage,
   } = props;
 
   const {
@@ -41,7 +41,25 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
     resetInputSettings: resetPassword,
   } = useInput((value: string) => value.trim().length >= 5);
 
-  const login = false;
+  const passwordInputProp = {
+    type: "password",
+    className: notifyInvalidPassword ? styles.inputInvalid : styles.input,
+    id: "Password",
+    name: "Password",
+    value: password,
+    onChange: setPassword,
+    onBlur: blurPassword,
+  };
+
+  const usernameInputProp = {
+    type: "text",
+    className: notifyInvalidUsername ? styles.inputInvalid : styles.input,
+    id: "Username",
+    name: "Username",
+    value: username,
+    onChange: setUsername,
+    onBlur: blurUsername,
+  };
 
   const { response, loading, fetchData } = UseAxios({
     method: "post",
@@ -49,25 +67,35 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
       userName: username,
       password: password,
     },
-    url: login ? "/login" : "/signup",
+    url: loginPage ? "/login" : "/signup",
   });
 
   const onSubmitFormHandler = async () => {
     await fetchData();
-    setHandleFetch(false);
   };
 
   useEffect(() => {
-    if (response.data && response.data.status === 201) {
-      alert(response.data.data.message);
-      resetUsername();
+    if (response.data) {
+      switch (response.data.status) {
+        case 200: {
+          console.log(response.data.data.token);
+          //redirect
+          break;
+        }
+        case 201: {
+          alert(response.data.data.message);
+          resetUsername();
+          break;
+        }
+        default: {
+        }
+      }
     }
+
     if (response.error) {
       alert(response.error);
     }
-    if (resetpasswordConfirmation) {
-      resetpasswordConfirmation();
-    }
+    resetpasswordConfirmation();
     resetPassword();
   }, [response, loading]);
 
@@ -78,18 +106,25 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
   }, [isPasswordValid, isUsernameValid]);
 
   useEffect(() => {
-    if (handleFetch && passwordConfirmation) {
-      console.log("first", passwordConfirmation, "second", password);
+    if (handleFetch) {
       setHandleFetch(false);
-      if (passwordConfirmation === password) {
-        onSubmitFormHandler();
-      } else {
-        alert("Password don't match");
-        setFormValid(false);
-        if (resetpasswordConfirmation) {
-          resetpasswordConfirmation();
+
+      switch (loginPage) {
+        case true: {
+          onSubmitFormHandler();
+          break;
         }
-        resetPassword();
+        case false: {
+          if (passwordConfirmation === password) {
+            onSubmitFormHandler();
+          } else {
+            alert("Password don't match");
+            setFormValid(false);
+            resetpasswordConfirmation();
+            resetPassword();
+          }
+          break;
+        }
       }
     }
   }, [handleFetch, password, passwordConfirmation]);
@@ -102,17 +137,7 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
           label={"Username"}
           inputInValid={!isUsernameValid}
           inputInValidText={"Please enter username"}
-          inputProp={{
-            type: "text",
-            className: notifyInvalidUsername
-              ? styles.inputInvalid
-              : styles.input,
-            id: "Username",
-            name: "Username",
-            value: username,
-            onChange: setUsername,
-            onBlur: blurUsername,
-          }}
+          inputProp={usernameInputProp}
         />
       </div>
       <div className={styles.inputDiv}>
@@ -121,17 +146,7 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
           label={"Password"}
           inputInValid={!isPasswordValid}
           inputInValidText={"Please enter password"}
-          inputProp={{
-            type: "password",
-            className: notifyInvalidPassword
-              ? styles.inputInvalid
-              : styles.input,
-            id: "Password",
-            name: "Password",
-            value: password,
-            onChange: setPassword,
-            onBlur: blurPassword,
-          }}
+          inputProp={passwordInputProp}
         />
       </div>
     </React.Fragment>

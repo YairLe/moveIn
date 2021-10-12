@@ -2,10 +2,10 @@ import React from "react";
 import Button from "./Button";
 
 interface IProps {
-  buttonDivStyle: any;
-  buttonStyle: any;
-  h1Style: any;
-  handleClick: Function;
+  buttonDivStyle: string;
+  buttonStyle: string;
+  h1Style: string;
+  handleClick?: Function;
   buttonDisabled: boolean;
   buttonType: "button" | "submit";
 }
@@ -14,7 +14,7 @@ const SignButton: React.FC<IProps> = (props: IProps) => {
   const {
     buttonStyle,
     buttonDivStyle,
-    handleClick,
+    handleClick = () => {},
     h1Style,
     buttonDisabled,
     buttonType,

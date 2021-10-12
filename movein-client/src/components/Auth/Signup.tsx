@@ -7,11 +7,15 @@ import styles from "./Login.module.css";
 
 interface IProps {
   setLoginPage: React.Dispatch<React.SetStateAction<boolean>>;
+  loginPage: boolean;
 }
 
 const Signup: React.FC<IProps> = (props: IProps) => {
-  const [formValid, setFormValid] = useState<boolean>(false);
-  const { setLoginPage } = props;
+  const [formValid, setFormValid] = useState(false);
+  const [handleFetch, setHandleFetch] = useState(false);
+
+  const { setLoginPage, loginPage } = props;
+
   const {
     value: passwordConfirmation,
     isValid: ispasswordConfirmationValid,
@@ -21,9 +25,19 @@ const Signup: React.FC<IProps> = (props: IProps) => {
     resetInputSettings: resetpasswordConfirmation,
   } = useInput((value: string) => value.trim().length >= 5);
 
-  const [handleFetch, setHandleFetch] = useState(false);
-
   const canHandleForm = formValid && ispasswordConfirmationValid;
+
+  const cofirmPasswordInputProp = {
+    type: "password",
+    className: notifyInvalidpasswordConfirmation
+      ? styles.inputInvalid
+      : styles.input,
+    id: "passwordConfirmation",
+    name: "passwordConfirmation",
+    value: passwordConfirmation,
+    onChange: setpasswordConfirmation,
+    onBlur: blurpasswordConfirmation,
+  };
 
   return (
     <React.Fragment>
@@ -39,8 +53,8 @@ const Signup: React.FC<IProps> = (props: IProps) => {
           setHandleFetch={setHandleFetch}
           passwordConfirmation={passwordConfirmation}
           setFormValid={setFormValid}
-          setLoginPage={setLoginPage}
           resetpasswordConfirmation={resetpasswordConfirmation}
+          loginPage={loginPage}
         />
         <div className={styles.inputDiv}>
           <Input
@@ -48,25 +62,12 @@ const Signup: React.FC<IProps> = (props: IProps) => {
             label={"Confirm Password"}
             inputInValid={!ispasswordConfirmationValid}
             inputInValidText={"please confirm password"}
-            inputProp={{
-              type: "password",
-              className: notifyInvalidpasswordConfirmation
-                ? styles.inputInvalid
-                : styles.input,
-              id: "passwordConfirmation",
-              name: "passwordConfirmation",
-              value: passwordConfirmation,
-              onChange: setpasswordConfirmation,
-              onBlur: blurpasswordConfirmation,
-            }}
+            inputProp={cofirmPasswordInputProp}
           />
         </div>
         <SignButton
           buttonDivStyle={styles.loginButtonDiv}
           buttonStyle={styles.confirmSignButton}
-          handleClick={() => {
-            setLoginPage(false);
-          }}
           buttonDisabled={!canHandleForm}
           h1Style={styles.signh1}
           buttonType="submit"

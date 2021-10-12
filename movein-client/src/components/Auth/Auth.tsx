@@ -6,7 +6,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 
 const Auth: React.FC = () => {
-  const [loginPage, setLoginPage] = useState(false);
+  const [loginPage, setLoginPage] = useState(true);
 
   return (
     <React.Fragment>
@@ -23,9 +23,9 @@ const Auth: React.FC = () => {
       </header>
 
       {loginPage ? (
-        <Login setLoginPage={setLoginPage} />
+        <Login setLoginPage={setLoginPage} loginPage={loginPage} />
       ) : (
-        <Signup setLoginPage={setLoginPage} />
+        <Signup setLoginPage={setLoginPage} loginPage={loginPage} />
       )}
     </React.Fragment>
   );

@@ -1,54 +1,50 @@
-import React, { useEffect } from "react";
-import Input from "../Input/Input";
+import React, { useState } from "react";
 import loginLogo from "../../images/LogIn.svg";
-import styles from "./Login.module.css";
 import Button from "../Button/Button";
-import InputAuth from "./InputAuth";
 import SignButton from "../Button/SignButton";
-import UseAxios from "../../hooks/use-axios";
+import InputAuth from "./InputAuth";
+import styles from "./Login.module.css";
 
 interface IProps {
   setLoginPage: React.Dispatch<React.SetStateAction<boolean>>;
+  loginPage: boolean;
 }
 
 const Login: React.FC<IProps> = (props: IProps) => {
-  const { setLoginPage } = props;
+  const { setLoginPage, loginPage } = props;
 
-  const { response, loading, fetchData } = UseAxios({
-    method: "get",
-    headers: {
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InRlc3R0ZXN0IiwidXNlcklkIjoiNyIsImlhdCI6MTYzMzkzOTQzNiwiZXhwIjoxNjMzOTQzMDM2fQ.wGSEEX1Stqf8rZpMuU0ECiZtkdo7C1Cidz_htLT4ZsY",
-    },
-  });
+  const [formValid, setFormValid] = useState(false);
 
-  const getAllData = async () => {
-    await fetchData();
-  };
-  useEffect(() => {
-    console.log(response, loading);
-  }, [loading]);
+  const [handleFetch, setHandleFetch] = useState(false);
 
   return (
     <React.Fragment>
       <div className={styles.container}>
-        <InputAuth
-          setHandleFetch={() => {}}
-          setFormValid={() => {}}
-          setLoginPage={setLoginPage}
-        />
-        <div className={styles.loginButtonDiv}>
-          <Button
-            buttonProp={{
-              className: styles.loginButton,
-              onClick: () => {
-                getAllData();
-              },
-            }}
-          >
-            <img src={loginLogo} alt="logo" />
-          </Button>
-        </div>
+        <form
+          name="AuthForm"
+          onSubmit={(event) => {
+            event.preventDefault();
+            setHandleFetch(true);
+          }}
+        >
+          <InputAuth
+            setHandleFetch={setHandleFetch}
+            handleFetch={handleFetch}
+            setFormValid={setFormValid}
+            loginPage={loginPage}
+          />
+          <div className={styles.loginButtonDiv}>
+            <Button
+              buttonProp={{
+                className: styles.loginButton,
+                type: "submit",
+                disabled: !formValid,
+              }}
+            >
+              <img src={loginLogo} alt="logo" />
+            </Button>
+          </div>
+        </form>
         <div className={styles.divh1}>
           <h1 className={styles.h1}>Don't have an account?</h1>
         </div>
