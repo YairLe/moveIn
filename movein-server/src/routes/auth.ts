@@ -8,8 +8,8 @@ const router = express.Router();
 router.post(
   "/signup",
   [
-    body("userName").custom((value, { req }) => {
-      User.findOne({ where: { userName: value } }).then((userDoc: Object) => {
+    body("userName").custom((value) => {
+      return User.findOne({ where: { userName: value } }).then((userDoc: Object) => {
         if (userDoc) {
           return Promise.reject("userName already exists");
         }

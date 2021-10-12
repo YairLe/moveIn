@@ -12,13 +12,13 @@ export const signupUser = async (
   next: NextFunction,
 ) => {
   const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    const error = generalError("Validation failed", 422);
-    error.data = errors.array();
-    throw error;
-  }
-  const { userName, password } = req.body;
   try {
+    if (!errors.isEmpty()) {
+      const error = generalError("Validation failed", 422);
+      error.data = errors.array();
+      throw error;
+    }
+    const { userName, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = new User({
       userName: userName,
@@ -46,7 +46,7 @@ export const loginUser = async (
     });
     console.log(user);
     if (!user) {
-      throw generalError("A user with this email could not be found", 401);
+      throw generalError("A user with this username could not be found", 401);
     }
     const isEqual = await bcrypt.compare(password, user.password);
 

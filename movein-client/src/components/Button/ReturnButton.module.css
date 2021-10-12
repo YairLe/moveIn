@@ -1,0 +1,17 @@
+.div {
+  width: 100%;
+  display: flex;
+}
+
+.button {
+  border: none;
+  background-color: transparent;
+  width: 4rem;
+  margin-left: 0.5rem;
+  justify-content: flex-start;
+  display: flex;
+  background-image: url("../../images/Arrow.svg");
+  background-repeat: no-repeat;
+  background-size: 4rem;
+  height: 3rem;
+}
