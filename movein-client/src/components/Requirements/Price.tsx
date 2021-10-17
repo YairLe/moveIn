@@ -1,5 +1,6 @@
 import React from "react";
 import Collapse from "../MainPage/Collapse/Collapse";
+import CollapsedRequirement from "./CollapsedRequirement";
 import styles from "./Price.module.css";
 
 interface IConfig {
@@ -32,12 +33,7 @@ const Price: React.FC = () => {
 
   return (
     <React.Fragment>
-      <Collapse
-        cubeName="Price"
-        collapsed={true}
-        cubeButtonStyle={styles.cubeButton}
-        cubeDivStyle={styles.cubeDiv}
-      >
+      <CollapsedRequirement cubeName="Price">
         <div className={styles.div}>
           {Object.keys(priceConfig).map((value) => {
             return (
@@ -48,7 +44,7 @@ const Price: React.FC = () => {
             );
           })}
         </div>
-      </Collapse>
+      </CollapsedRequirement>
     </React.Fragment>
   );
 };

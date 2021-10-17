@@ -1,8 +1,11 @@
 import React from "react";
 import Header from "../components/Header/Header";
 import Collapse from "../components/MainPage/Collapse/Collapse";
+import Area from "../components/Requirements/Area";
+import Essentials from "../components/Requirements/Essentials";
 import HeaderComponent from "../components/Requirements/HeaderComponent";
 import Price from "../components/Requirements/Price";
+import Rooms from "../components/Requirements/Rooms";
 import requirementLogo from "../images/Requirements.svg";
 import styles from "./Requirements.module.css";
 
@@ -15,15 +18,9 @@ const Requirements: React.FC = () => {
         element={<HeaderComponent />}
       />
       <Price />
-      <Collapse cubeName="Area" collapsed={false}>
-        <h1>bye</h1>
-      </Collapse>
-      <Collapse cubeName="Rooms" collapsed={false}>
-        <h1>bye</h1>
-      </Collapse>
-      <Collapse cubeName="Essentials" collapsed={false}>
-        <h1>bye</h1>
-      </Collapse>
+      <Area />
+      <Rooms />
+      <Essentials />
     </React.Fragment>
   );
 };

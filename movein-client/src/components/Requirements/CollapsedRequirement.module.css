@@ -1,0 +1,21 @@
+.cubeButton {
+  font-size: 1.5rem;
+  width: 50%;
+  justify-content: center;
+  height: 3rem;
+  font-family: "Raleway", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.5rem;
+  background: #132023;
+
+  color: #f9f9f9;
+}
+
+.cubeDiv {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  padding-bottom: 1rem;
+}

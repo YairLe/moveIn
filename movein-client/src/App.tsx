@@ -21,12 +21,12 @@ function App() {
             <Route path="/apartments">
               <MainPage />
             </Route>
-            {/* <Route path="*">
+            <Route path="/" exact>
               <Redirect to="/main" />
-            </Route> */}
+            </Route>
           </>
         ) : (
-          <Route path="/" exact>
+          <Route path="/">
             <Auth />
           </Route>
         )}
