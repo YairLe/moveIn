@@ -1,0 +1,39 @@
+.collapsed,
+.expanded {
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.collapsed {
+  max-height: 0;
+}
+
+.expanded {
+  height: auto;
+  max-height: 10rem;
+}
+
+.buttonCollapsed {
+  background-color: #267587;
+}
+
+.buttonExpanded {
+  background-color: #000000;
+}
+
+.divContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.divCube {
+  width: 50%;
+  margin-left: 4rem;
+}
+
+.divButton {
+  display: flex;
+  margin-left: 0.5rem;
+  width: 4rem;
+}

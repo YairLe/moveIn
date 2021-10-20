@@ -1,0 +1,15 @@
+.div {
+  width: 100%;
+  display: flex;
+}
+
+.button {
+  border: none;
+  background-color: transparent;
+  width: 4rem;
+  display: flex;
+  background-image: url("../../images/Edit.svg");
+  background-repeat: no-repeat;
+  background-size: 4rem;
+  height: 3rem;
+}

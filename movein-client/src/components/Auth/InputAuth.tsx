@@ -78,7 +78,7 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
     if (response.data) {
       switch (response.data.status) {
         case 200: {
-          console.log(response.data.data.token);
+          console.log(response.data.data);
           //redirect
           break;
         }
@@ -102,6 +102,8 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
   useEffect(() => {
     if (isPasswordValid && isUsernameValid) {
       setFormValid(true);
+    } else {
+      setFormValid(false);
     }
   }, [isPasswordValid, isUsernameValid]);
 

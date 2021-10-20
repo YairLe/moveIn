@@ -61,7 +61,7 @@ export const loginUser = async (
       "someSuperSecretSecret",
       { expiresIn: "1h" },
     );
-    res.status(200).json({ token: token, userId: user.id });
+    res.status(200).json({ token: token, userName: user.userName });
   } catch (err) {
     errorCode(err, next);
   }
