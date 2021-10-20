@@ -1,39 +1,39 @@
 import React from "react";
-import ReturnButton from "../Button/ReturnButton";
 import { useHistory, useLocation } from "react-router-dom";
-import Edit from "../../images/Edit.svg";
 import EditButton from "../Button/EditButton";
+import ReturnButton from "../Button/ReturnButton";
 
-const HeaderComponent: React.FC = () => {
+interface IProps {
+  handleButtonClick?: Function;
+  headerStyle: string;
+  editButtonStyle: string;
+}
+
+const HeaderComponent: React.FC<IProps> = (props: IProps) => {
+  const { headerStyle, editButtonStyle, handleButtonClick = () => {} } = props;
   const history = useHistory();
   const location = useLocation();
 
   const navigateHandler = () => {
-    location.pathname === "/requirements"
-      ? history.push("/main")
-      : history.push("/requirements");
+    location.pathname !== "/requirements"
+      ? history.push("/requirements")
+      : history.push("/main");
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        width: "95%",
-        height: "4rem",
-        flexDirection: "row",
-        alignItems: "center",
-      }}
-    >
+    <div className={headerStyle}>
       <ReturnButton
         handleClick={() => {
           navigateHandler();
         }}
       />
-      <EditButton
-        handleClick={() => {
-          console.log("hey");
-        }}
-      />
+      <div className={editButtonStyle}>
+        <EditButton
+          handleClick={() => {
+            handleButtonClick();
+          }}
+        />
+      </div>
     </div>
   );
 };
