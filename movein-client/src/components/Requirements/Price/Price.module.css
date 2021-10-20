@@ -1,0 +1,15 @@
+.div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 4rem;
+  padding-bottom: 1rem;
+}
+
+.divElement {
+  display: flex;
+  align-items: center;
+  font-family: "Work Sans", sans-serif;
+  height: 1.5rem;
+}

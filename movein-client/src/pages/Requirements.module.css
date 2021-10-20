@@ -6,3 +6,16 @@
   flex-direction: column;
   padding-bottom: 1rem;
 }
+
+.div {
+  display: flex;
+  width: 95%;
+  height: 4rem;
+  flex-direction: row;
+  align-items: center;
+}
+
+.editButton {
+  align-items: center;
+  display: flex;
+}

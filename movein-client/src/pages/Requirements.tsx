@@ -1,21 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "../components/Header/Header";
-import Collapse from "../components/MainPage/Collapse/Collapse";
-import Area from "../components/Requirements/Area";
-import Essentials from "../components/Requirements/Essentials";
+import Area from "../components/Requirements/Area/Area";
+import Essentials from "../components/Requirements/Essentials/Essentials";
 import HeaderComponent from "../components/Requirements/HeaderComponent";
-import Price from "../components/Requirements/Price";
-import Rooms from "../components/Requirements/Rooms";
+import Price from "../components/Requirements/Price/Price";
+import Rooms from "../components/Requirements/Rooms/Rooms";
+import { EditContext } from "../context/EditContext";
 import requirementLogo from "../images/Requirements.svg";
 import styles from "./Requirements.module.css";
 
 const Requirements: React.FC = () => {
+  const { setIsEdit: setEditState } = useContext(EditContext);
+  const handleEditState = () => {
+    setEditState();
+  };
+
   return (
     <React.Fragment>
       <Header
         headerStyle={styles.header}
         image={requirementLogo}
-        element={<HeaderComponent />}
+        element={
+          <HeaderComponent
+            editButtonStyle={styles.editButton}
+            headerStyle={styles.div}
+            handleButtonClick={handleEditState}
+          />
+        }
       />
       <Price />
       <Area />
