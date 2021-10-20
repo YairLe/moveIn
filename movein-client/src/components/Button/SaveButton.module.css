@@ -1,0 +1,13 @@
+.divStyle {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonStyle {
+  width: 50%;
+  height: 3rem;
+  color: white;
+  font-size: 2rem;
+}

@@ -8,7 +8,6 @@ interface IProps {
 
 const EditButton: React.FC<IProps> = (props: IProps) => {
   const { handleClick } = props;
-
   return (
     <div className={styles.div}>
       <Button
