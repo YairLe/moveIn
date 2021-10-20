@@ -1,0 +1,81 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  padding-bottom: 1rem;
+}
+
+.div {
+  display: flex;
+  width: 95%;
+  height: 4rem;
+  align-items: center;
+}
+
+.editButton {
+  align-items: center;
+  display: flex;
+  width: 100%;
+  padding-right: 4rem;
+}
+
+.cityLabel {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: "Work Sans", sans-serif;
+}
+
+.cityLabel {
+  padding: 0 0.5rem 0 1.5rem;
+}
+
+.input,
+.inputInvalid,
+.inputList {
+  height: 2rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: bold;
+  border: 0;
+  width: 8rem;
+}
+
+.inputInvalid {
+  background-color: #c78890;
+}
+
+.inputList {
+  margin-bottom: 0.5rem;
+}
+
+.addDivButton {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+  position: fixed;
+  left: 1.5rem;
+}
+
+.addButton {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  align-items: center;
+  display: flex;
+  border: 1px solid transparent;
+  background-color: #fff8f8;
+}
+
+.inputListDiv {
+  overflow-y: scroll;
+  max-height: 10rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputListContainerDiv {
+  display: flex;
+  justify-content: center;
+}

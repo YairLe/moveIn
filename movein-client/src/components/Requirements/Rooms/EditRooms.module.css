@@ -1,0 +1,47 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  padding-bottom: 1rem;
+}
+
+.div {
+  display: flex;
+  width: 95%;
+  height: 4rem;
+  align-items: center;
+}
+
+.editButton {
+  align-items: center;
+  display: flex;
+  width: 100%;
+  padding-right: 4rem;
+}
+
+.input,
+.inputInvalid {
+  height: 2rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: bold;
+  border: 0;
+  width: 8rem;
+  margin: 0rem 1.5rem 0 1.5rem;
+}
+
+.inputInvalid {
+  background-color: #c78890;
+}
+
+.divMinMax {
+  display: flex;
+  padding: 0rem 1.5rem 0rem 1rem;
+  align-items: center;
+}
+
+.roomsMinMax {
+  font-size: 2rem;
+  font-weight: 400;
+  font-family: "Denk One", sans-serif;
+}
