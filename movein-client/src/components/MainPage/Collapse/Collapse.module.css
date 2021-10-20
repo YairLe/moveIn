@@ -20,3 +20,20 @@
 .buttonExpanded {
   background-color: #000000;
 }
+
+.divContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.divCube {
+  width: 50%;
+  margin-left: 4rem;
+}
+
+.divButton {
+  display: flex;
+  margin-left: 0.5rem;
+  width: 4rem;
+}
