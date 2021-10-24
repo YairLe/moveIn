@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface IEnteredValue {
   enteredValue: string;
   enteredValueTouched: boolean;
 }
 
-const useInput = (validateInput: Function) => {
+const useInput = (validateInput: Function, initValue?: string) => {
   const [inputSettings, setInputSettings] = useState<IEnteredValue>({
     enteredValue: "",
     enteredValueTouched: false,
   });
+
+  useEffect(() => {
+    setInputSettings((prevState) => {
+      return { ...prevState, enteredValue: initValue ? initValue : "" };
+    });
+  }, [initValue]);
 
   const isEnteredValueValid = validateInput(inputSettings.enteredValue);
 

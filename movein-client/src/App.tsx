@@ -1,9 +1,9 @@
 import React, { Suspense, useEffect, useState } from "react";
-import Auth from "./components/Auth/Auth";
-import { Redirect, Route, Switch } from "react-router-dom";
-import { EditProvider } from "./context/EditContext";
 import { useCookies } from "react-cookie";
+import { Redirect, Route, Switch } from "react-router-dom";
+import Auth from "./components/Auth/Auth";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
+import { EditProvider } from "./context/EditContext";
 
 const MainPage = React.lazy(() => import("./pages/MainPage"));
 const Requirements = React.lazy(() => import("./pages/Requirements"));
