@@ -16,7 +16,7 @@ const IncreasedInput: React.FC<IProps> = (props: IProps) => {
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value, id } = e.target;
     const list: string[] = [...inputList];
-    list[Number(id)] = value;
+    list[+id] = value;
     setInputList(list);
   };
 

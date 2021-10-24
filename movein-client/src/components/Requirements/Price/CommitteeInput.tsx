@@ -24,7 +24,7 @@ const CommitteeInput: React.FC<IProps> = (props: IProps) => {
     onChange: setCommittee,
     onBlur: blurCommittee,
     min: 0,
-    max: 1000,
+    max: 6000,
   };
 
   return (

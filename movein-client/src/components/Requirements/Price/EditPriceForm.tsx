@@ -1,23 +1,27 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { RequirementsContext } from "../../../context/RequirementsContext";
 import useInput from "../../../hooks/use-input";
+import { IRequirements } from "../../../interfaces/interfaces";
 import SaveButton from "../../Button/SaveButton";
+import UpdateRequirements from "../UpdateRequirements";
 import CommitteeInput from "./CommitteeInput";
 import RentInput from "./RentInput";
 import TaxInput from "./TaxInput";
 
-interface IProps {}
+const EditPriceForm: React.FC = () => {
+  const { requirements, setRequirements } = useContext(RequirementsContext);
+  const [oldValue, setOldValue] = useState<IRequirements>({ ...requirements });
 
-const EditPriceForm: React.FC<IProps> = (props: IProps) => {
-  const numberValidator = (value: string) =>
-    /^\d+$/.test(value) && Number(value) > 0;
+  const { handleFetching } = UpdateRequirements();
 
+  const numberValidator = (value: string) => /^\d+$/.test(value) && +value > 0;
   const {
     value: minRent,
     isValid: isMinRentValid,
     notifyInvalidValue: notifyInvalidMinRent,
     inputSettingsChangeHandler: setMinRent,
     inputBlur: blurMinRent,
-  } = useInput(numberValidator);
+  } = useInput(numberValidator, String(requirements.minPrice));
 
   const {
     value: maxRent,
@@ -25,7 +29,7 @@ const EditPriceForm: React.FC<IProps> = (props: IProps) => {
     notifyInvalidValue: notifyInvalidMaxRent,
     inputSettingsChangeHandler: setMaxRent,
     inputBlur: blurMaxRent,
-  } = useInput(numberValidator);
+  } = useInput(numberValidator, String(requirements.maxPrice));
 
   const {
     value: tax,
@@ -33,7 +37,7 @@ const EditPriceForm: React.FC<IProps> = (props: IProps) => {
     notifyInvalidValue: notifyInvalidTax,
     inputSettingsChangeHandler: setTax,
     inputBlur: blurTax,
-  } = useInput(numberValidator);
+  } = useInput(numberValidator, String(requirements.tax));
 
   const {
     value: committee,
@@ -41,21 +45,39 @@ const EditPriceForm: React.FC<IProps> = (props: IProps) => {
     notifyInvalidValue: notifyInvalidCommittee,
     inputSettingsChangeHandler: setCommittee,
     inputBlur: blurCommittee,
-  } = useInput(numberValidator);
+  } = useInput(numberValidator, String(requirements.committee));
 
   const allowSubmit =
-    Number(minRent) < Number(maxRent) &&
+    +minRent < +maxRent &&
     isMinRentValid &&
     isMaxRentValid &&
     isTaxValid &&
-    isCommitteeValid;
+    isCommitteeValid &&
+    Object.entries(oldValue).toString() !==
+      Object.entries(requirements).toString();
 
-  const submitFormHandler: React.FormEventHandler<HTMLFormElement> = (
+  useEffect(() => {
+    setOldValue((prevState: IRequirements) => {
+      return {
+        ...prevState,
+        minPrice: +minRent,
+        maxPrice: +maxRent,
+        tax: +tax,
+        committee: +committee,
+      };
+    });
+  }, [minRent, maxRent, tax, committee]);
+
+  const submitFormHandler: React.FormEventHandler<HTMLFormElement> = async (
     event,
   ) => {
     event.preventDefault();
-    //handle save to db
-    console.log(minRent, maxRent, tax, committee);
+    const response = await handleFetching(oldValue);
+    if (response.data) {
+      localStorage.setItem("requirements", JSON.stringify(oldValue));
+      setRequirements(oldValue);
+      alert(response.data.message);
+    }
   };
 
   return (
