@@ -1,4 +1,6 @@
+import jwt from "jsonwebtoken";
 import React, { useEffect } from "react";
+import { useCookies } from "react-cookie";
 import UseAxios from "../../hooks/use-axios";
 import useInput from "../../hooks/use-input";
 import Input from "../Input/Input";
@@ -14,6 +16,8 @@ interface IProps {
 }
 
 const InputAuth: React.FC<IProps> = (props: IProps) => {
+  const [, setCookie] = useCookies(["login", "token"]);
+
   const {
     handleFetch,
     setHandleFetch,
@@ -49,6 +53,7 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
     value: password,
     onChange: setPassword,
     onBlur: blurPassword,
+    autoComplete: "on",
   };
 
   const usernameInputProp = {
@@ -61,29 +66,48 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
     onBlur: blurUsername,
   };
 
-  const { response, loading, fetchData } = UseAxios({
+  const { loading, fetchData } = UseAxios({
     method: "post",
-    body: {
-      userName: username,
-      password: password,
-    },
+
     url: loginPage ? "/login" : "/signup",
   });
 
   const onSubmitFormHandler = async () => {
-    await fetchData();
-  };
+    const response = await fetchData({
+      userName: username,
+      password: password,
+    });
 
-  useEffect(() => {
-    if (response.data) {
-      switch (response.data.status) {
+    if (response) {
+      switch (response.status) {
         case 200: {
-          console.log(response.data.data);
-          //redirect
+          const responseData = response.data;
+          const { userName, userId, exp } = jwt.decode(
+            responseData.token,
+          ) as any;
+          const expirationTime = exp * 1000;
+          const expirationDate = new Date(expirationTime);
+
+          setCookie("token", responseData.token, {
+            expires: expirationDate,
+          });
+          setCookie(
+            "login",
+            {
+              loggedIn: true,
+              userId: userId,
+              userName: userName,
+              expires: expirationTime,
+            },
+            {
+              expires: expirationDate,
+            },
+          );
+
           break;
         }
         case 201: {
-          alert(response.data.data.message);
+          alert(response.data.message);
           resetUsername();
           break;
         }
@@ -97,7 +121,7 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
     }
     resetpasswordConfirmation();
     resetPassword();
-  }, [response, loading]);
+  };
 
   useEffect(() => {
     if (isPasswordValid && isUsernameValid) {
