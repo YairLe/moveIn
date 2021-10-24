@@ -24,11 +24,10 @@ const Auth: React.FC = () => {
           ) : null
         }
       />
-
       {loginPage ? (
         <Login setLoginPage={setLoginPage} loginPage={loginPage} />
       ) : (
-        <Signup setLoginPage={setLoginPage} loginPage={loginPage} />
+        <Signup loginPage={loginPage} />
       )}
     </React.Fragment>
   );

@@ -6,15 +6,13 @@ import InputAuth from "./InputAuth";
 import styles from "./Login.module.css";
 
 interface IProps {
-  setLoginPage: React.Dispatch<React.SetStateAction<boolean>>;
   loginPage: boolean;
 }
 
 const Signup: React.FC<IProps> = (props: IProps) => {
   const [formValid, setFormValid] = useState(false);
   const [handleFetch, setHandleFetch] = useState(false);
-
-  const { setLoginPage, loginPage } = props;
+  const { loginPage } = props;
 
   const {
     value: passwordConfirmation,
