@@ -12,7 +12,10 @@ const port = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+const corsOptions = {
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+app.use(cors(corsOptions));
 
 app.use(authRoute);
 app.use(checkAuth, requirementsRoute);
@@ -25,13 +28,11 @@ app.get("/", (req, res) => {
 });
 
 app.use((error: any, req: any, res: any, next: any) => {
-  console.log(error, " i am also here");
   const status = error.statusCode || 500;
   const message = error.message;
   const data = error.data;
   res.status(status).json({ message: message, data: data });
 });
-
 
 app.listen(port, () => {
   console.log(`server is listening on ${port}`);

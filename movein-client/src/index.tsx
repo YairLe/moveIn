@@ -1,16 +1,21 @@
 import React from "react";
+import { CookiesProvider } from "react-cookie";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-
+import App from "./App";
+import { RequirementsProvider } from "./context/RequirementsContext";
+import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <CookiesProvider>
+      <RequirementsProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </RequirementsProvider>
+    </CookiesProvider>
   </React.StrictMode>,
   document.getElementById("root"),
 );

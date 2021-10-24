@@ -4,9 +4,11 @@ import styles from "./MainPage.module.css";
 import logo from "../images/MoveIn.svg";
 import Cube from "../components/MainPage/Cube/Cube";
 import { useHistory } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 const MainPage: React.FC = () => {
-  const nameOfTheUser = "Kakigadol";
+  const [cookies] = useCookies(["login"]);
+  const nameOfTheUser = cookies.login.userName;
   const history = useHistory();
 
   return (

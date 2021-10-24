@@ -53,14 +53,27 @@ export const updateRequirementForUser = async (
   const userId = req.userId;
   const dataToUpdate = req.body;
   try {
-    await Requirements.update(
-      { ...dataToUpdate },
-      {
-        where: {
-          userId: userId,
+    const foundUser = await Requirements.findOne({ where: { userId: userId } });
+
+    if (foundUser) {
+      await Requirements.update(
+        { ...dataToUpdate },
+        {
+          where: {
+            userId: userId,
+          },
         },
-      },
-    );
+      );
+    } else {
+      const newRequirements = new Requirements({
+        userId: userId,
+        ...dataToUpdate,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+
+      await newRequirements.save();
+    }
 
     res.status(201).json({ message: "Requirement updated successfully" });
   } catch (err: any) {
@@ -90,8 +103,8 @@ export const addRequirementForUser = async (
       city,
       minRooms,
       maxRooms,
-      essentials,
-      neighborhood,
+      essentials = null,
+      neighborhood = null,
     } = req.body;
 
     const newRequirements = new Requirements({
@@ -103,8 +116,8 @@ export const addRequirementForUser = async (
       city: city,
       minRooms: minRooms,
       maxRooms: maxRooms,
-      essentials: essentials ? essentials : null,
-      neighborhood: neighborhood ? neighborhood : null,
+      essentials: essentials,
+      neighborhood: neighborhood,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -112,9 +125,9 @@ export const addRequirementForUser = async (
     await newRequirements.save();
     res.status(201).json({ message: "Requirements added successfully." });
   } catch (err: any) {
-    if (err.parent.constraint === "unique_user_id") {
-      resetRequirementsConstraintOnError();
-    }
+    // if (err.parent.constraint === "unique_user_id") {
+    //   resetRequirementsConstraintOnError();
+    // }
     errorCode(err, next);
   }
 };

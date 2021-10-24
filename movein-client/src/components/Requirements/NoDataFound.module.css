@@ -1,0 +1,9 @@
+.divElement {
+  display: flex;
+  align-items: center;
+  font-family: "Work Sans", sans-serif;
+  height: 1.5rem;
+  justify-content: center;
+  padding-bottom: 1rem;
+  font-display: swap;
+}

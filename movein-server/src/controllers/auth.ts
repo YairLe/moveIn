@@ -44,7 +44,6 @@ export const loginUser = async (
       where: { userName: userName },
       attributes: ["id", "userName", "password"],
     });
-    console.log(user);
     if (!user) {
       throw generalError("A user with this username could not be found", 401);
     }

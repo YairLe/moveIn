@@ -1,6 +1,14 @@
 import React from "react";
 import CollapsedRequirement from "../CollapsedRequirement";
 import styles from "./Price.module.css";
+const NoDataFound = React.lazy(() => import("../NoDataFound"));
+
+interface IProps {
+  minPrice: number;
+  maxPrice: number;
+  tax: number;
+  committee: number;
+}
 
 interface IConfig {
   [key: string]: {
@@ -9,11 +17,12 @@ interface IConfig {
   };
 }
 
-const Price: React.FC = () => {
-  const minPrice = 2000;
-  const maxPrice = 3000;
-  const tax = 900;
-  const committee = 250;
+const Price: React.FC<IProps> = (props: IProps) => {
+  const { minPrice, maxPrice, tax, committee } = props;
+
+  const checkNotNull = () => {
+    return maxPrice !== 1;
+  };
 
   const priceConfig: IConfig = {
     rent: {
@@ -33,16 +42,20 @@ const Price: React.FC = () => {
   return (
     <React.Fragment>
       <CollapsedRequirement cubeName="Price">
-        <div className={styles.div}>
-          {Object.keys(priceConfig).map((value, key) => {
-            return (
-              <div key={key} className={styles.divElement}>
-                <strong>{priceConfig[value].name}&nbsp; </strong>
-                <p>{priceConfig[value].element}</p>
-              </div>
-            );
-          })}
-        </div>
+        {checkNotNull() ? (
+          <div className={styles.div}>
+            {Object.keys(priceConfig).map((value, key) => {
+              return (
+                <div key={key} className={styles.divElement}>
+                  <strong>{priceConfig[value].name}&nbsp; </strong>
+                  <p>{priceConfig[value].element}</p>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <NoDataFound />
+        )}
       </CollapsedRequirement>
     </React.Fragment>
   );

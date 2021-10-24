@@ -1,49 +1,42 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { Method } from "axios";
+import { useState } from "react";
 
 interface IProps {
   url?: string;
   method: "post" | "get" | "put" | "delete";
-  body?: Object;
-  headers?: Record<string, string>;
-}
-
-interface IResponse {
-  data: any;
-  error: string | null;
 }
 
 const UseAxios = (props: IProps) => {
   const baseUrl = "http://localhost:8080";
-  const { url, method, body, headers } = props;
-  const [response, setResponse] = useState<IResponse>({
-    data: null,
-    error: null,
-  });
-  const [loading, setLoading] = useState<boolean>(false);
+  const { url, method } = props;
 
-  const fetchData = async () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const newMethod = method.toUpperCase() as Method;
+  const fetchData = async (body?: Object, headers?: any) => {
     try {
-      const result = await axios[method](`${baseUrl}${url ? url : ""}`, body, {
+      const result = await axios({
+        method: newMethod,
+        url: `${baseUrl}${url ? url : ""}`,
         headers: headers,
+        data: body,
       });
-      console.log(result);
-      setResponse({ data: result, error: null });
+      return result;
     } catch (err: any) {
-      console.log(err.response.data);
-      let errorMessage = err.response.data;
-      if (errorMessage.hasOwnProperty("data")) {
-        errorMessage = errorMessage.data[0].msg;
-      } else {
-        errorMessage = errorMessage.message;
+      let errorMessage = err;
+      if (err.response) {
+        errorMessage = err.response.data;
+        if (errorMessage.hasOwnProperty("data")) {
+          errorMessage = errorMessage.data[0].msg;
+        } else {
+          errorMessage = errorMessage.message;
+        }
       }
-      setResponse({ data: null, error: errorMessage });
+      return errorMessage;
     } finally {
       setLoading(false);
     }
   };
-
-  return { response, loading, fetchData };
+  return { loading, fetchData };
 };
 
 export default UseAxios;

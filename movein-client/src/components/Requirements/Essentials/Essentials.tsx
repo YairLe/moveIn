@@ -1,27 +1,34 @@
 import React from "react";
-import styles from "./Essentials.module.css";
 import CollapsedRequirement from "../CollapsedRequirement";
+import styles from "./Essentials.module.css";
+const NoDataFound = React.lazy(() => import("../NoDataFound"));
 
-const Essentials: React.FC = () => {
-  const essentials = [
-    "AC in all rooms",
-    "Parking spot",
-    "3 rooms min",
-    "Refrigerator",
-    "Living room",
-  ];
+interface IProps {
+  essentials: string[];
+}
+
+const Essentials: React.FC<IProps> = (props: IProps) => {
+  const { essentials } = props;
+
+  const checkNotNull = () => {
+    return essentials[0] !== "";
+  };
 
   return (
     <CollapsedRequirement cubeName="Essentials">
-      <div className={styles.div}>
-        {essentials.map((value, key) => {
-          return (
-            <div key={key} className={styles.innerDiv}>
-              {value}
-            </div>
-          );
-        })}
-      </div>
+      {checkNotNull() ? (
+        <div className={styles.div}>
+          {essentials.map((value, key) => {
+            return (
+              <div key={key} className={styles.innerDiv}>
+                {value}
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <NoDataFound />
+      )}
     </CollapsedRequirement>
   );
 };

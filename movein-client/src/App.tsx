@@ -1,16 +1,47 @@
-import React from "react";
-import Auth from "./components/Auth/Auth";
+import React, { Suspense, useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import { Redirect, Route, Switch } from "react-router-dom";
-import MainPage from "./pages/MainPage";
-import Requirements from "./pages/Requirements";
-import EditPrice from "./components/Requirements/Price/EditPrice";
+import Auth from "./components/Auth/Auth";
+import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 import { EditProvider } from "./context/EditContext";
-import EditArea from "./components/Requirements/Area/EditArea";
-import EditRooms from "./components/Requirements/Rooms/EditRooms";
-import EditEssentials from "./components/Requirements/Essentials/EditEssentials";
+
+const MainPage = React.lazy(() => import("./pages/MainPage"));
+const Requirements = React.lazy(() => import("./pages/Requirements"));
+const EditPrice = React.lazy(
+  () => import("./components/Requirements/Price/EditPrice"),
+);
+const EditArea = React.lazy(
+  () => import("./components/Requirements/Area/EditArea"),
+);
+const EditRooms = React.lazy(
+  () => import("./components/Requirements/Rooms/EditRooms"),
+);
+const EditEssentials = React.lazy(
+  () => import("./components/Requirements/Essentials/EditEssentials"),
+);
 
 function App() {
-  const isAuth = true;
+  const [cookies, removeCookie] = useCookies(["login", "token"]);
+  const [isAuth, setIsAuth] = useState<boolean>(
+    cookies.login ? cookies.login.loggedIn : false,
+  );
+  const calculateRemainingTime: Function = () => {
+    const currentTime = new Date().getTime();
+    const adjExpirationTime = cookies.login.expires;
+    const remainingDuration = adjExpirationTime - currentTime;
+    return remainingDuration;
+  };
+
+  useEffect(() => {
+    if (cookies.login && cookies.login.loggedIn) {
+      const timeLeft = calculateRemainingTime();
+      setIsAuth(true);
+      setTimeout(() => {
+        setIsAuth(false);
+        removeCookie("login", "token");
+      }, timeLeft);
+    }
+  }, [cookies]);
 
   const RequirementsRoutes = () => {
     return (
@@ -39,31 +70,39 @@ function App() {
 
   return (
     <Switch>
-      {isAuth ? (
-        <Switch>
-          <Route exact path="/main">
-            <MainPage />
+      <Suspense
+        fallback={
+          <div>
+            <LoadingSpinner />
+          </div>
+        }
+      >
+        {isAuth ? (
+          <Switch>
+            <Route exact path="/main">
+              <MainPage />
+            </Route>
+            <Route path="/requirements">{RequirementsRoutes()}</Route>
+            <Route exact path="/apartments">
+              <MainPage />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/main" />
+            </Route>
+            <Route path="*">
+              <Redirect to="/" />
+            </Route>
+          </Switch>
+        ) : (
+          <Route path="/">
+            <Auth />
           </Route>
-          <Route path="/requirements">{RequirementsRoutes()}</Route>
-          <Route exact path="/apartments">
-            <MainPage />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/main" />
-          </Route>
-          <Route path="*">
-            <Redirect to="/" />
-          </Route>
-        </Switch>
-      ) : (
-        <Route path="/">
-          <Auth />
-        </Route>
-      )}
+        )}
 
-      <Route exact path="*">
-        <Redirect to="/" />
-      </Route>
+        <Route exact path="*">
+          <Redirect to="/main" />
+        </Route>
+      </Suspense>
     </Switch>
   );
 }
