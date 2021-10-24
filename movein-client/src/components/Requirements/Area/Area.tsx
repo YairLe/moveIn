@@ -1,20 +1,24 @@
 import React from "react";
-import styles from "./Area.module.css";
 import CollapsedRequirement from "../CollapsedRequirement";
+import styles from "./Area.module.css";
+const NoDataFound = React.lazy(() => import("../NoDataFound"));
 
-const Area: React.FC = () => {
-  const city = "Haifa";
-  const neighborhoods: any = [
-    "Bat galim",
-    "Kiryat Eliezer",
-    "Ramat Hanasi",
-    "West Carmel",
-    "Ramot Remez",
-  ];
+interface IProps {
+  city: string;
+  neighborhoods: string[];
+}
+
+const Area: React.FC<IProps> = (props: IProps) => {
+  const { city, neighborhoods } = props;
+
+  const checkNotNull = () => {
+    return city;
+  };
+
   const loopLength = neighborhoods.length;
 
   const neighborhoodsElements = () => {
-    let elementToReturn: any = [];
+    let elementToReturn: Array<React.ReactNode> = [];
     let i = 0;
     for (; i <= loopLength / 2; i += 2) {
       elementToReturn.push(
@@ -37,12 +41,16 @@ const Area: React.FC = () => {
   return (
     <React.Fragment>
       <CollapsedRequirement cubeName="Area">
-        <div className={styles.div}>
-          <div className={styles.divStrong}>
-            <strong>{city}</strong>
+        {checkNotNull() ? (
+          <div className={styles.div}>
+            <div className={styles.divStrong}>
+              <strong>{city}</strong>
+            </div>
+            {neighborhoodsElements()}
           </div>
-          {neighborhoodsElements()}
-        </div>
+        ) : (
+          <NoDataFound />
+        )}
       </CollapsedRequirement>
     </React.Fragment>
   );
