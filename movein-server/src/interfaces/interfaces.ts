@@ -2,7 +2,7 @@ import { Request } from "express";
 
 export interface ErrorWithStatus extends Error {
   statusCode: number;
-  data?: Array<{}>;
+  data?: {}[];
 }
 
 export interface reqWithUser extends Request {
