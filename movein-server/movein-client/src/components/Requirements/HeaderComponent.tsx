@@ -1,4 +1,5 @@
 import React from "react";
+//@ts-ignore
 import { useHistory, useLocation } from "react-router-dom";
 import EditButton from "../Button/EditButton";
 import ReturnButton from "../Button/ReturnButton";

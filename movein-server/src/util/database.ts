@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 
 const processInfo = process.env;
 const sequelize = new Sequelize(
-  processInfo.database,
+  processInfo.DATABASE,
   processInfo.USERNAME,
   processInfo.PASSWORD,
   {

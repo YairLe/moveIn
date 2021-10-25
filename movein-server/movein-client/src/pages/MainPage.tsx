@@ -3,6 +3,7 @@ import Header from "../components/Header/Header";
 import styles from "./MainPage.module.css";
 import logo from "../images/MoveIn.svg";
 import Cube from "../components/MainPage/Cube/Cube";
+//@ts-ignore
 import { useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
 

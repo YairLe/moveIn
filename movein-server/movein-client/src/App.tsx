@@ -1,5 +1,6 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+//@ts-ignore
 import { Redirect, Route, Switch } from "react-router-dom";
 import Auth from "./components/Auth/Auth";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
@@ -100,7 +101,7 @@ function App() {
         )}
 
         <Route exact path="*">
-          <Redirect to="/main" />
+          <Redirect to="/" />
         </Route>
       </Suspense>
     </Switch>
