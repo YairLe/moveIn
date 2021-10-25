@@ -18,7 +18,7 @@ const corsOptions = {
 // app.use(express.static(path.join(__dirname, "../movein-client/build")));
 app.use(cors(corsOptions));
 
-app.use(express.static(path.join(__dirname, "../../movein-client", "build")));
+app.use(express.static(path.join(__dirname, "../movein-client", "build")));
 app.use(authRoute);
 app.use(checkAuth, requirementsRoute);
 
@@ -28,9 +28,7 @@ Requirements.belongsTo(User);
 app.use(express.static("public"));
 
 app.use((req, res, next) => {
-  res.sendFile(
-    path.join(__dirname, "../../movein-client", "build", "index.html"),
-  );
+  res.sendFile(path.join(__dirname, "../movein-client", "build", "index.html"));
 });
 app.use((error: any, req: any, res: any, next: any) => {
   const status = error.statusCode || 500;
