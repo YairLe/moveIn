@@ -27,7 +27,7 @@ export const getRequirementForUser = async (
   const userId = req.userId;
   try {
     const userRequirement = await Requirements.findOne({
-      where: { userId: userId },
+      where: { userId },
       attributes: {
         exclude: ["id", "userId", "createdAt", "updatedAt"],
       },
@@ -39,7 +39,7 @@ export const getRequirementForUser = async (
       data = userRequirement.dataValues;
     }
 
-    res.status(201).json({ message: message, data: data });
+    res.status(201).json({ message, data });
   } catch (err: any) {
     errorCode(err, next);
   }
@@ -53,14 +53,14 @@ export const updateRequirementForUser = async (
   const userId = req.userId;
   const dataToUpdate = req.body;
   try {
-    const foundUser = await Requirements.findOne({ where: { userId: userId } });
+    const foundUser = await Requirements.findOne({ where: { userId } });
 
     if (foundUser) {
       await Requirements.update(
         { ...dataToUpdate },
         {
           where: {
-            userId: userId,
+            userId,
           },
         },
       );
@@ -108,16 +108,16 @@ export const addRequirementForUser = async (
     } = req.body;
 
     const newRequirements = new Requirements({
-      userId: userId,
-      minPrice: minPrice,
-      maxPrice: maxPrice,
-      tax: tax,
-      committee: committee,
-      city: city,
-      minRooms: minRooms,
-      maxRooms: maxRooms,
-      essentials: essentials,
-      neighborhood: neighborhood,
+      userId,
+      minPrice,
+      maxPrice,
+      tax,
+      committee,
+      city,
+      minRooms,
+      maxRooms,
+      essentials,
+      neighborhood,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
