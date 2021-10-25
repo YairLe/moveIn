@@ -27,7 +27,7 @@
   font-weight: bold;
   border: 0;
   width: 8rem;
-  margin: 0rem 1.5rem 0 1.5rem;
+  margin: 0 1.5rem;
 }
 
 .inputInvalid {
@@ -36,7 +36,7 @@
 
 .divMinMax {
   display: flex;
-  padding: 0rem 1.5rem 0rem 1rem;
+  padding: 0 1.5rem 0 1rem;
   align-items: center;
 }
 

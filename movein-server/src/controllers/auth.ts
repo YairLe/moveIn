@@ -21,7 +21,7 @@ export const signupUser = async (
     const { userName, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = new User({
-      userName: userName,
+      userName,
       password: hashedPassword,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -41,7 +41,7 @@ export const loginUser = async (
   const { userName, password } = req.body;
   try {
     const user = await User.findOne({
-      where: { userName: userName },
+      where: { userName },
       attributes: ["id", "userName", "password"],
     });
     if (!user) {
@@ -60,7 +60,7 @@ export const loginUser = async (
       "someSuperSecretSecret",
       { expiresIn: "1h" },
     );
-    res.status(200).json({ token: token, userName: user.userName });
+    res.status(200).json({ token, userName: user.userName });
   } catch (err) {
     errorCode(err, next);
   }

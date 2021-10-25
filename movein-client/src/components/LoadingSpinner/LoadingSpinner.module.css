@@ -11,7 +11,7 @@
   margin: 8px;
   border-radius: 50%;
   border: 6px solid teal;
-  border-color: teal transparent teal transparent;
+  border-color: teal transparent;
   animation: spinner 1.2s linear infinite;
 }
 @keyframes spinner {
