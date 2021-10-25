@@ -4,10 +4,11 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "start": "node dist/app.js",
+    "start": "tsc&&node dist/app.js",
     "build": "tsc",
     "dev": "tsc&&nodemon dist/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "cd ../movein-client &&npm install && npm run build"
   },
   "keywords": [],
   "author": "",
