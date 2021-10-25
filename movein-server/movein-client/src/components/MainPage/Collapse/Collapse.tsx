@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+//@ts-ignore
 import { useHistory } from "react-router-dom";
 import { EditContext } from "../../../context/EditContext";
 import EditButton from "../../Button/EditButton";

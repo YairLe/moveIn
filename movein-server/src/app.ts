@@ -8,7 +8,7 @@ import authRoute from "./routes/auth";
 import requirementsRoute from "./routes/requirements";
 import path from "path";
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,7 +26,6 @@ User.hasOne(Requirements);
 Requirements.belongsTo(User);
 
 app.use(express.static("public"));
-
 app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "../movein-client", "build", "index.html"));
 });

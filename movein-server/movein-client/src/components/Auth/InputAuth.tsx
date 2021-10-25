@@ -112,13 +112,11 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
           break;
         }
         default: {
+          alert("Wrong Username or Password");
         }
       }
     }
 
-    if (response.error) {
-      alert(response.error);
-    }
     resetpasswordConfirmation();
     resetPassword();
   };
@@ -144,7 +142,7 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
           if (passwordConfirmation === password) {
             onSubmitFormHandler();
           } else {
-            alert("Password don't match");
+            alert("Passwords don't match");
             setFormValid(false);
             resetpasswordConfirmation();
             resetPassword();

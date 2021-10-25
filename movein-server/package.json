@@ -4,11 +4,11 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "start": "tsc&&node dist/app.js",
+    "start": "nodemon dist/app.js",
     "build": "tsc",
     "dev": "tsc&&nodemon dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "cd /movein-client &&npm install && npm run build"
+    "heroku-postbuild": "cd movein-client &&npm i --save-dev @types/react-router-dom&&npm install && npm run build"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +22,7 @@
     "@types/node": "^12.7.1",
     "@types/sequelize": "^4.28.10",
     "tslint": "^5.12.1",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.4"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
