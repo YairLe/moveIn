@@ -9,22 +9,22 @@ import { EditProvider } from "./context/EditContext";
 const MainPage = React.lazy(() => import("./pages/MainPage"));
 const Requirements = React.lazy(() => import("./pages/Requirements"));
 const EditPrice = React.lazy(
-  () => import("./components/Requirements/Price/EditPrice"),
+  () => import("./components/Requirements/Price/EditPrice")
 );
 const EditArea = React.lazy(
-  () => import("./components/Requirements/Area/EditArea"),
+  () => import("./components/Requirements/Area/EditArea")
 );
 const EditRooms = React.lazy(
-  () => import("./components/Requirements/Rooms/EditRooms"),
+  () => import("./components/Requirements/Rooms/EditRooms")
 );
 const EditEssentials = React.lazy(
-  () => import("./components/Requirements/Essentials/EditEssentials"),
+  () => import("./components/Requirements/Essentials/EditEssentials")
 );
 
 function App() {
   const [cookies, removeCookie] = useCookies(["login", "token"]);
   const [isAuth, setIsAuth] = useState<boolean>(
-    cookies.login ? cookies.login.loggedIn : false,
+    cookies.login ? cookies.login.loggedIn : false
   );
   const calculateRemainingTime: Function = () => {
     const currentTime = new Date().getTime();
@@ -62,7 +62,6 @@ function App() {
           </Route>
           <Route path="*">
             <Requirements />
-            <Redirect to="/requirements" />
           </Route>
         </Switch>
       </EditProvider>
@@ -91,18 +90,19 @@ function App() {
               <Redirect to="/main" />
             </Route>
             <Route path="*">
-              <Redirect to="/" />
+              <Redirect to="/main" />
             </Route>
           </Switch>
         ) : (
-          <Route path="/">
-            <Auth />
-          </Route>
+          <Switch>
+            <Route path="/main">
+              <Auth />
+            </Route>
+            <Route path="*">
+              <Redirect to="/main" />
+            </Route>
+          </Switch>
         )}
-
-        <Route exact path="*">
-          <Redirect to="/" />
-        </Route>
       </Suspense>
     </Switch>
   );
