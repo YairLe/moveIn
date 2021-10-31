@@ -16,7 +16,7 @@ const checkAuth = (req: reqWithUser, res: Response, next: NextFunction) => {
   const authHeader = req.get("Authorization");
   if (!authHeader) {
     res.redirect("/");
-    return next();
+    return;
     // throw generalError("Not authenticated", 401);
   }
 
@@ -30,7 +30,7 @@ const checkAuth = (req: reqWithUser, res: Response, next: NextFunction) => {
   }
   if (!decodedToken) {
     res.redirect("/");
-    return next();
+    return;
     // throw generalError("Not authenticated", 401);
   }
   req.userId = decodedToken.userId;
