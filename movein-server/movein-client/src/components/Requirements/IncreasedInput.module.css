@@ -19,7 +19,6 @@
 .addDivButton {
   display: flex;
   justify-content: center;
-  padding-bottom: 1rem;
   position: fixed;
   transform: translate3d(0, 0, 0);
   left: 1.5rem;
@@ -27,7 +26,7 @@
 }
 
 .addButton {
-  width: 2rem;
+  /* width: 2rem; */
   height: 2rem;
   border-radius: 50%;
   align-items: center;

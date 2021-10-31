@@ -8,14 +8,14 @@ import UpdateRequirements from "../UpdateRequirements";
 const EditEssentialsForm: React.FC = () => {
   const { requirements, setRequirements } = useContext(RequirementsContext);
   const [inputList, setInputList] = useState<Array<string>>(
-    requirements.essentials,
+    requirements.essentials
   );
   const { handleFetching } = UpdateRequirements();
 
   const [oldValue, setOldValue] = useState<IRequirements>({ ...requirements });
 
   const submitFormHandler: React.FormEventHandler<HTMLFormElement> = async (
-    event,
+    event
   ) => {
     event.preventDefault();
     event.preventDefault();
