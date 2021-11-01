@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useCookies } from "react-cookie";
+import EditButton from "../components/Button/EditButton";
 import Header from "../components/Header/Header";
 import HeaderComponent from "../components/Requirements/HeaderComponent";
 import { EditContext } from "../context/EditContext";
@@ -9,14 +10,14 @@ import requirementLogo from "../images/Requirements.svg";
 import styles from "./Requirements.module.css";
 
 const Price = React.lazy(
-  () => import("../components/Requirements/Price/Price"),
+  () => import("../components/Requirements/Price/Price")
 );
 const Area = React.lazy(() => import("../components/Requirements/Area/Area"));
 const Rooms = React.lazy(
-  () => import("../components/Requirements/Rooms/Rooms"),
+  () => import("../components/Requirements/Rooms/Rooms")
 );
 const Essentials = React.lazy(
-  () => import("../components/Requirements/Essentials/Essentials"),
+  () => import("../components/Requirements/Essentials/Essentials")
 );
 
 const Requirements: React.FC = () => {
@@ -39,7 +40,7 @@ const Requirements: React.FC = () => {
         {
           Authorization: `Bearer ${cookies.token}`,
           "Content-type": "application/json",
-        },
+        }
       );
       if (response.data) {
         switch (response.data.message) {
@@ -49,7 +50,7 @@ const Requirements: React.FC = () => {
           case "User requirement retrived":
             localStorage.setItem(
               "requirements",
-              JSON.stringify(response.data.data),
+              JSON.stringify(response.data.data)
             );
 
             setRequirements(response.data.data);
@@ -69,7 +70,7 @@ const Requirements: React.FC = () => {
           <HeaderComponent
             editButtonStyle={styles.editButton}
             headerStyle={styles.div}
-            handleButtonClick={handleEditState}
+            element={<EditButton handleClick={handleEditState} />}
           />
         }
       />

@@ -1,24 +1,44 @@
 import React from "react";
 //@ts-ignore
 import { useHistory, useLocation } from "react-router-dom";
+import AddButton from "../Button/AddButton";
 import EditButton from "../Button/EditButton";
 import ReturnButton from "../Button/ReturnButton";
 
 interface IProps {
-  handleButtonClick?: Function;
   headerStyle: string;
   editButtonStyle: string;
+  element: React.ReactNode;
 }
 
 const HeaderComponent: React.FC<IProps> = (props: IProps) => {
-  const { headerStyle, editButtonStyle, handleButtonClick = () => {} } = props;
+  const { headerStyle, editButtonStyle, element } = props;
   const history = useHistory();
   const location = useLocation();
+  const [, outerRoute, innerRoute] = location.pathname.split("/");
 
   const navigateHandler = () => {
-    location.pathname !== "/requirements"
-      ? history.push("/requirements")
-      : history.push("/main");
+    switch (outerRoute) {
+      case "requirements":
+        if (innerRoute) {
+          history.push("/requirements");
+        } else {
+          history.push("/main");
+        }
+        break;
+      case "apartments": {
+        if (innerRoute) {
+          history.push("/requirements");
+        } else {
+          history.push("/main");
+        }
+        break;
+      }
+      default: {
+        history.push("/main");
+        break;
+      }
+    }
   };
 
   return (
@@ -29,11 +49,7 @@ const HeaderComponent: React.FC<IProps> = (props: IProps) => {
         }}
       />
       <div className={editButtonStyle}>
-        <EditButton
-          handleClick={() => {
-            handleButtonClick();
-          }}
-        />
+        <>{element}</>
       </div>
     </div>
   );

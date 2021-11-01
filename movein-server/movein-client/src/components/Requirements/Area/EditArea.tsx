@@ -1,5 +1,6 @@
 import React from "react";
 import AreaLogo from "../../../images/Area.svg";
+import EditButton from "../../Button/EditButton";
 import Header from "../../Header/Header";
 import HeaderComponent from "../HeaderComponent";
 import styles from "./EditArea.module.css";
@@ -15,6 +16,7 @@ const EditArea: React.FC = () => {
           <HeaderComponent
             editButtonStyle={styles.editButton}
             headerStyle={styles.div}
+            element={<EditButton handleClick={() => {}} />}
           />
         }
       />
