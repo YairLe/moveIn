@@ -1,5 +1,11 @@
 .span {
   color: #22414a;
   font-size: 2rem;
+  border-radius: 50%;
+  background-color: purple;
+  width: 2rem;
+  height: 2rem;
   text-align: center;
+  vertical-align: top;
+  line-height: 2rem;
 }
