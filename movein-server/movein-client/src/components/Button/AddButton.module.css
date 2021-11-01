@@ -7,7 +7,9 @@
   height: 2rem;
   text-align: center;
   line-height: 2rem;
-  display: block;
+  display: flex;
   margin: auto;
+  justify-content: center;
+  align-items: center;
   /*  */
 }
