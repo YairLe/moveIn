@@ -7,6 +7,7 @@ import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 import { EditProvider } from "./context/EditContext";
 
 const MainPage = React.lazy(() => import("./pages/MainPage"));
+const Apartment = React.lazy(() => import("./pages/Apartment"));
 const Requirements = React.lazy(() => import("./pages/Requirements"));
 const EditPrice = React.lazy(
   () => import("./components/Requirements/Price/EditPrice")
@@ -84,7 +85,7 @@ function App() {
             </Route>
             <Route path="/requirements">{RequirementsRoutes()}</Route>
             <Route exact path="/apartments">
-              <MainPage />
+              <Apartment />
             </Route>
             <Route exact path="/">
               <Redirect to="/main" />
