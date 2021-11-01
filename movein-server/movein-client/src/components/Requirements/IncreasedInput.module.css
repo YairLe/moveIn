@@ -19,7 +19,7 @@
 .addDivButton {
   display: flex;
   justify-content: center;
-  padding-bottom: 1rem;
+  align-items: center;
   position: fixed;
   left: 1.5rem;
 }
@@ -29,9 +29,10 @@
   height: 2rem;
   border-radius: 50%;
   align-items: center;
+  justify-content: center;
   display: flex;
   border: 1px solid transparent;
-  background-color: #fff8f8;
+  background-color: transparent;
 }
 
 .inputListContainerDiv {
