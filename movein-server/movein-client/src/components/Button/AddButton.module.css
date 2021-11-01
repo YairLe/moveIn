@@ -1,5 +1,14 @@
 .span {
-  color: "#22414A";
+  color: #22414a;
   font-size: 2rem;
+  border-radius: 50%;
+  background-color: #fff8f8;
+  width: 2rem;
+  height: 2rem;
   text-align: center;
+  line-height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Work Sans", sans-serif;
 }
