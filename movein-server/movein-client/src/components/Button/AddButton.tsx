@@ -19,7 +19,7 @@ const AddButton: React.FC<IProps> = (props: IProps) => {
           className: buttonStyle,
         }}
       >
-        <span className={styles.span}>&#43;</span>
+        <div className={styles.span}>&#43;</div>
       </Button>
     </div>
   );
