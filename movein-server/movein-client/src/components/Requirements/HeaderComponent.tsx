@@ -8,7 +8,7 @@ import ReturnButton from "../Button/ReturnButton";
 interface IProps {
   headerStyle: string;
   editButtonStyle: string;
-  element: React.ReactNode;
+  element?: React.ReactNode;
 }
 
 const HeaderComponent: React.FC<IProps> = (props: IProps) => {
@@ -28,7 +28,7 @@ const HeaderComponent: React.FC<IProps> = (props: IProps) => {
         break;
       case "apartments": {
         if (innerRoute) {
-          history.push("/requirements");
+          history.push("/apartments");
         } else {
           history.push("/main");
         }
