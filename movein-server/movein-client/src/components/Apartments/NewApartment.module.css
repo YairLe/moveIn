@@ -1,0 +1,51 @@
+.header {
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  padding-bottom: 1rem;
+}
+
+.div {
+  display: flex;
+  width: 95%;
+  height: 4rem;
+  flex-direction: row;
+  align-items: center;
+}
+
+.editButton {
+  align-items: center;
+  display: flex;
+}
+
+.label {
+  color: #22414a;
+  font-family: "Denk One", sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  white-space: pre-line;
+  padding-right: 1rem;
+  width: 10rem;
+}
+
+.inputDiv {
+  display: flex;
+  width: 95%;
+  height: 4rem;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.inputInvalid {
+  background-color: #c78890;
+}
+
+.input,
+.inputInvalid {
+  height: 50%;
+  margin-top: 0.5rem;
+  border: 0;
+  width: 40%;
+}

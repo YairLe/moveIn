@@ -2,12 +2,13 @@ import React, { Suspense, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 //@ts-ignore
 import { Redirect, Route, Switch } from "react-router-dom";
+import NewApartment from "./components/Apartments/NewApartment";
 import Auth from "./components/Auth/Auth";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 import { EditProvider } from "./context/EditContext";
 
 const MainPage = React.lazy(() => import("./pages/MainPage"));
-const Apartment = React.lazy(() => import("./pages/Apartment"));
+const Apartments = React.lazy(() => import("./pages/Apartments"));
 const Requirements = React.lazy(() => import("./pages/Requirements"));
 const EditPrice = React.lazy(
   () => import("./components/Requirements/Price/EditPrice")
@@ -69,6 +70,26 @@ function App() {
     );
   };
 
+  const ApartmentsRoutes = () => (
+    <Switch>
+      <Route path="/apartments/newapartment">
+        <NewApartment />
+      </Route>
+      {/* <Route path="/requirements/area">
+            <EditArea />
+          </Route>
+          <Route path="/requirements/rooms">
+            <EditRooms />
+          </Route>
+          <Route path="/requirements/essentials">
+            <EditEssentials />
+          </Route> */}
+      <Route path="*">
+        <Apartments />
+      </Route>
+    </Switch>
+  );
+
   return (
     <Switch>
       <Suspense
@@ -84,9 +105,7 @@ function App() {
               <MainPage />
             </Route>
             <Route path="/requirements">{RequirementsRoutes()}</Route>
-            <Route exact path="/apartments">
-              <Apartment />
-            </Route>
+            <Route path="/apartments">{ApartmentsRoutes()}</Route>
             <Route exact path="/">
               <Redirect to="/main" />
             </Route>
