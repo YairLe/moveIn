@@ -1,0 +1,25 @@
+.div {
+  width: 100%;
+  display: flex;
+}
+
+.button {
+  border: none;
+  background-color: transparent;
+  width: 3rem;
+  margin-left: 0.5rem;
+  align-items: flex-start;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-size: 3rem;
+  height: 3rem;
+  background-position: center;
+}
+
+.buttonPrev {
+  background-image: url("../../images/ArrowPrev.svg");
+}
+
+.buttonNext {
+  background-image: url("../../images/ArrowNext.svg");
+}
