@@ -6,6 +6,7 @@ import NewApartment from "./components/Apartments/NewApartment";
 import Auth from "./components/Auth/Auth";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 import { EditProvider } from "./context/EditContext";
+import { NewApartmentProvider } from "./context/NewApartmentContext";
 
 const MainPage = React.lazy(() => import("./pages/MainPage"));
 const Apartments = React.lazy(() => import("./pages/Apartments"));
@@ -71,23 +72,17 @@ function App() {
   };
 
   const ApartmentsRoutes = () => (
-    <Switch>
-      <Route path="/apartments/newapartment">
-        <NewApartment />
-      </Route>
-      {/* <Route path="/requirements/area">
-            <EditArea />
-          </Route>
-          <Route path="/requirements/rooms">
-            <EditRooms />
-          </Route>
-          <Route path="/requirements/essentials">
-            <EditEssentials />
-          </Route> */}
-      <Route path="*">
-        <Apartments />
-      </Route>
-    </Switch>
+    <NewApartmentProvider>
+      <Switch>
+        <Route path="/apartments/newapartment">
+          <NewApartment />
+        </Route>
+
+        <Route path="*">
+          <Apartments />
+        </Route>
+      </Switch>
+    </NewApartmentProvider>
   );
 
   return (
