@@ -29,20 +29,9 @@ const Apartments: React.FC = () => {
             headerStyle={styles.div}
             element={
               <AddButton
-                // buttonStyle={{
-                //   justifyContent: "center",
-                //   backgroundColor: "#155766",
-                //   height: "8rem",
-                //   alignItems: "center",
-                //   display: "flex",
-                //   width: "80%",
-                //   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                //   flexDirection: "column",
-                //   padding: "0",
-                //   border: "transparent ",
-                //   marginBottom: "1rem",
-                // }}
                 handleAddClick={handleButtonClick}
+                divStyle={styles.addDivButton}
+                buttonStyle={styles.addButton}
               />
             }
           />

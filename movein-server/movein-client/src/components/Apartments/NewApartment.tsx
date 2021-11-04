@@ -3,11 +3,13 @@ import { useHistory } from "react-router-dom";
 import newApartmentLogo from "../../images/NewApartment.svg";
 import ChangePageButton from "../Button/ChangePageButton";
 import ReturnButton from "../Button/ReturnButton";
+import SaveButton from "../Button/SaveButton";
 import Header from "../Header/Header";
 import Input from "../Input/Input";
 import HeaderComponent from "../Requirements/HeaderComponent";
 import styles from "./NewApartment.module.css";
 import NewApartmentFirstPage from "./NewApartmentPages/NewApartmentFirstPage";
+import NewApartmentSecondPage from "./NewApartmentPages/NewApartmentSecondPage";
 interface IProps {}
 
 const NewApartment: React.FC<IProps> = (props: IProps) => {
@@ -20,7 +22,7 @@ const NewApartment: React.FC<IProps> = (props: IProps) => {
       case 1:
         return <NewApartmentFirstPage />;
       case 2:
-        return <div>hey</div>;
+        return <NewApartmentSecondPage />;
       default:
         return <div>bye</div>;
     }
@@ -96,7 +98,10 @@ const NewApartment: React.FC<IProps> = (props: IProps) => {
             )}
           </div>
         </div>
-        <form>{changePage()}</form>
+        <form>
+          {changePage()}
+          <SaveButton buttonDisabled={true} />
+        </form>
       </div>
     </React.Fragment>
   );

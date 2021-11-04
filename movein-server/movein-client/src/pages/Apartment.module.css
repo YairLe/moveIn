@@ -19,3 +19,16 @@
   align-items: center;
   display: flex;
 }
+
+.addDivButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addButton {
+  border-radius: 50%;
+  display: flex;
+  border: 1px solid transparent;
+  background-color: transparent;
+}

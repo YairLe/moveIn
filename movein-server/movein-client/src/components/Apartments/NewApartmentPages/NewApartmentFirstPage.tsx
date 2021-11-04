@@ -1,75 +1,74 @@
-import React from "react";
-import Input from "../../Input/Input";
+import React, { useContext } from "react";
+import { NewApartmentContext } from "../../../context/NewApartmentContext";
+import InputTextForm from "../InputTextForm";
 import styles from "../NewApartment.module.css";
 
 const NewApartmentFirstPage: React.FC = () => {
-  const tempBooleanValidator = false;
-  const cofirmPasswordInputProp = {
-    type: "password",
-    className: tempBooleanValidator ? styles.inputInvalid : styles.input,
-    // id: "passwordConfirmation",
-    name: "passwordConfirmation",
-    // value: passwordConfirmation,
-    // onChange: setpasswordConfirmation,
-    // onBlur: blurpasswordConfirmation,
+  const validator = (value: string) => /^\d+$/.test(value) && +value > 0;
+  const { newApartment, setNewApartment } = useContext(NewApartmentContext);
+  console.log(newApartment, "printing");
+  const inputTextProp = {
+    inputStyle: styles.input,
+    inputInvalidStyle: styles.inputInvalid,
+    labelStyle: styles.label,
+    validator: validator,
   };
-
   return (
     <React.Fragment>
       <div className={styles.inputDiv}>
-        <Input
-          labelStyle={styles.label}
-          label={"Street"}
-          inputInValid={false}
-          inputInValidText={""}
-          inputProp={cofirmPasswordInputProp}
+        <InputTextForm
+          {...inputTextProp}
+          id="Street"
+          name="Street"
+          label="Street"
+          type="text"
         />
       </div>
       <div className={styles.inputDiv}>
-        <Input
-          labelStyle={styles.label}
-          label={"Neighborhood"}
-          inputInValid={false}
-          inputInValidText={""}
-          inputProp={cofirmPasswordInputProp}
+        <InputTextForm
+          {...inputTextProp}
+          id="Neighborhood"
+          name="Neighborhood"
+          label="Neighborhood"
+          type="text"
         />
       </div>
       <div className={styles.inputDiv}>
-        <Input
-          labelStyle={styles.label}
-          label={"City"}
-          inputInValid={false}
-          inputInValidText={""}
-          inputProp={cofirmPasswordInputProp}
+        <InputTextForm
+          {...inputTextProp}
+          id="City"
+          name="City"
+          label="City"
+          type="text"
         />
       </div>
       <div className={styles.inputDiv}>
-        <Input
-          labelStyle={styles.label}
-          label={"Rent"}
-          inputInValid={false}
-          inputInValidText={""}
-          inputProp={cofirmPasswordInputProp}
+        <InputTextForm
+          {...inputTextProp}
+          id="Rent"
+          name="Rent"
+          label="Rent"
+          type="number"
         />
       </div>
       <div className={styles.inputDiv}>
-        <Input
-          labelStyle={styles.label}
-          label={`property tax 
-              -2 months`}
-          inputInValid={false}
-          inputInValidText={""}
-          inputProp={cofirmPasswordInputProp}
+        <InputTextForm
+          {...inputTextProp}
+          id="Tax"
+          name="Tax"
+          label={`Property tax 
+          -2 months`}
+          type="number"
         />
       </div>
       <div className={styles.inputDiv}>
-        <Input
-          labelStyle={styles.label}
+        <InputTextForm
+          {...inputTextProp}
+          id="Committee"
+          name="Committee"
           label={`House 
-              Committee`}
-          inputInValid={false}
-          inputInValidText={""}
-          inputProp={cofirmPasswordInputProp}
+          Committee`}
+          type="number"
         />
       </div>
     </React.Fragment>

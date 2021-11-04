@@ -20,22 +20,46 @@
   display: flex;
 }
 
-.label {
+.label,
+.labelFloor {
   color: #22414a;
   font-family: "Denk One", sans-serif;
   font-weight: 400;
   font-size: 1.5rem;
   white-space: pre-line;
-  padding-right: 1rem;
-  width: 10rem;
 }
 
+.label {
+  width: 12rem;
+  padding-right: 1rem;
+}
 .inputDiv {
   display: flex;
-  width: 95%;
+  width: 90%;
+  padding-left: 0.5rem;
   height: 4rem;
-  justify-content: space-evenly;
   align-items: center;
+}
+
+.inputDivSecondPage {
+  display: flex;
+  width: 90%;
+  padding-left: 0.5rem;
+  height: 4rem;
+  align-items: center;
+}
+
+.labelFloor {
+  width: 5rem;
+}
+
+.inputFloor {
+  display: flex;
+  height: 50%;
+  padding-right: 1rem;
+  margin-right: 0.1rem;
+  border: 0;
+  width: 4rem;
 }
 
 .inputInvalid {
@@ -47,5 +71,5 @@
   height: 50%;
   margin-top: 0.5rem;
   border: 0;
-  width: 40%;
+  width: 8rem;
 }
