@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import newApartmentLogo from "../../images/NewApartment.svg";
 import ChangePageButton from "../Button/ChangePageButton";
-import ReturnButton from "../Button/ReturnButton";
 import SaveButton from "../Button/SaveButton";
 import Header from "../Header/Header";
-import Input from "../Input/Input";
 import HeaderComponent from "../Requirements/HeaderComponent";
 import styles from "./NewApartment.module.css";
 import NewApartmentFirstPage from "./NewApartmentPages/NewApartmentFirstPage";
 import NewApartmentSecondPage from "./NewApartmentPages/NewApartmentSecondPage";
+import NewApartmentThirdPage from "./NewApartmentPages/NewApartmentThirdPage";
 interface IProps {}
 
 const NewApartment: React.FC<IProps> = (props: IProps) => {
@@ -24,7 +22,7 @@ const NewApartment: React.FC<IProps> = (props: IProps) => {
       case 2:
         return <NewApartmentSecondPage />;
       default:
-        return <div>bye</div>;
+        return <NewApartmentThirdPage />;
     }
   };
 

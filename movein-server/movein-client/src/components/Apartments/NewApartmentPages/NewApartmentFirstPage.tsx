@@ -1,23 +1,28 @@
-import React, { useContext } from "react";
-import { NewApartmentContext } from "../../../context/NewApartmentContext";
+import React from "react";
 import InputTextForm from "../InputTextForm";
 import styles from "../NewApartment.module.css";
 
 const NewApartmentFirstPage: React.FC = () => {
-  const validator = (value: string) => /^\d+$/.test(value) && +value > 0;
-  const { newApartment, setNewApartment } = useContext(NewApartmentContext);
-  console.log(newApartment, "printing");
-  const inputTextProp = {
+  const validatorForNumber = (value: string) =>
+    /^\d+$/.test(value) && +value > 0;
+  const validatorForString = (value: string) => value.length < 20;
+  const inputNumberProp = {
     inputStyle: styles.input,
     inputInvalidStyle: styles.inputInvalid,
     labelStyle: styles.label,
-    validator: validator,
+    validator: validatorForNumber,
+  };
+  const inputStringProp = {
+    inputStyle: styles.input,
+    inputInvalidStyle: styles.inputInvalid,
+    labelStyle: styles.label,
+    validator: validatorForString,
   };
   return (
     <React.Fragment>
       <div className={styles.inputDiv}>
         <InputTextForm
-          {...inputTextProp}
+          {...inputStringProp}
           id="Street"
           name="Street"
           label="Street"
@@ -26,7 +31,7 @@ const NewApartmentFirstPage: React.FC = () => {
       </div>
       <div className={styles.inputDiv}>
         <InputTextForm
-          {...inputTextProp}
+          {...inputStringProp}
           id="Neighborhood"
           name="Neighborhood"
           label="Neighborhood"
@@ -35,7 +40,7 @@ const NewApartmentFirstPage: React.FC = () => {
       </div>
       <div className={styles.inputDiv}>
         <InputTextForm
-          {...inputTextProp}
+          {...inputStringProp}
           id="City"
           name="City"
           label="City"
@@ -44,7 +49,7 @@ const NewApartmentFirstPage: React.FC = () => {
       </div>
       <div className={styles.inputDiv}>
         <InputTextForm
-          {...inputTextProp}
+          {...inputNumberProp}
           id="Rent"
           name="Rent"
           label="Rent"
@@ -53,7 +58,7 @@ const NewApartmentFirstPage: React.FC = () => {
       </div>
       <div className={styles.inputDiv}>
         <InputTextForm
-          {...inputTextProp}
+          {...inputNumberProp}
           id="Tax"
           name="Tax"
           label={`Property tax 
@@ -63,7 +68,7 @@ const NewApartmentFirstPage: React.FC = () => {
       </div>
       <div className={styles.inputDiv}>
         <InputTextForm
-          {...inputTextProp}
+          {...inputNumberProp}
           id="Committee"
           name="Committee"
           label={`House 

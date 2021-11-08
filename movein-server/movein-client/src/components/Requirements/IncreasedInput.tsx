@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { NewApartmentContext } from "../../context/NewApartmentContext";
 import AddButton from "../Button/AddButton";
 import Input from "../Input/Input";
 import styles from "./IncreasedInput.module.css";
@@ -12,6 +13,7 @@ interface IProps {
 
 const IncreasedInput: React.FC<IProps> = (props: IProps) => {
   const { element, placeholder, inputList, setInputList } = props;
+  const { newApartment, setNewApartment } = useContext(NewApartmentContext);
 
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value, id } = e.target;
@@ -30,6 +32,15 @@ const IncreasedInput: React.FC<IProps> = (props: IProps) => {
     placeholder: placeholder,
     className: styles.inputList,
   };
+
+  useEffect(() => {
+    const element = { ...newApartment };
+    element["comments"] =
+      inputList.length !== 1
+        ? inputList.filter((value) => value !== "")
+        : inputList;
+    setNewApartment(element);
+  }, [inputList]);
 
   return (
     <React.Fragment>

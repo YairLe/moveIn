@@ -1,24 +1,55 @@
 import React, { useContext, useState } from "react";
 import { NewApartmentContext } from "../../../context/NewApartmentContext";
+import useInput from "../../../hooks/use-input";
+import Input from "../../Input/Input";
 import IncreasedInput from "../../Requirements/IncreasedInput";
 import InputTextForm from "../InputTextForm";
 import styles from "../NewApartment.module.css";
 
-const NewApartmentSecondPage: React.FC = () => {
+const NewApartmentThirdPage: React.FC = () => {
   const { newApartment, setNewApartment } = useContext(NewApartmentContext);
 
   const [inputList, setInputList] = useState<string[]>(newApartment.comments);
-
+  const [imgValue, setImgValue] = useState<any>();
   const validator = (value: string) => /^\d+$/.test(value) && +value > 0;
+  //   const {
+  //     value,
+  //     isValid,
+  //     notifyInvalidValue,
+  //     inputSettingsChangeHandler,
+  //     inputBlur,
+  //   } = useInput(() => {}, "");
 
-  const inputTextProp = {
-    inputInvalidStyle: styles.inputInvalid,
-    validator: validator,
+  //   const inputProp = {
+  //     type: "file",
+  //     id: "fileUpload",
+  //     multiple: true,
+  //     // name: name,
+  //     value: value,
+  //     onChange: inputSettingsChangeHandler,
+  //     onBlur: inputBlur,
+  //     // min: 0,
+  //   };
+
+  const changeFile: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    console.log(event.target.files);
+    // setInputSettings((prevState) => {
+    //   return { ...prevState, enteredValue: event.target.value };
+    // });
   };
+  //   console.log("value is", value);
   return (
     <React.Fragment>
-      <div className={styles.inputDivSecondPage}>
-        <InputTextForm
+      <div className={styles.inputDiv}>
+        <input
+          type="file"
+          multiple
+          value={imgValue}
+          id="fileUpload"
+          onChange={changeFile}
+        />
+
+        {/* <InputTextForm
           {...inputTextProp}
           id="Rooms"
           name="Rooms"
@@ -26,9 +57,9 @@ const NewApartmentSecondPage: React.FC = () => {
           type="number"
           inputStyle={styles.input}
           labelStyle={styles.label}
-        />
+        /> */}
       </div>
-      <div className={styles.inputDivSecondPage}>
+      {/* <div className={styles.inputDivSecondPage}>
         <InputTextForm
           {...inputTextProp}
           id="FloorMin"
@@ -47,9 +78,9 @@ const NewApartmentSecondPage: React.FC = () => {
           inputStyle={styles.inputFloor}
           labelStyle={styles.labelFloor}
         />
-      </div>
+      </div> */}
 
-      <IncreasedInput
+      {/* <IncreasedInput
         inputList={inputList}
         setInputList={setInputList}
         placeholder="Add Comments"
@@ -58,9 +89,9 @@ const NewApartmentSecondPage: React.FC = () => {
             Comments
           </p>
         }
-      />
+      /> */}
     </React.Fragment>
   );
 };
 
-export default NewApartmentSecondPage;
+export default NewApartmentThirdPage;

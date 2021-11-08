@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { IndexType } from "typescript";
 import { NewApartmentContext } from "../../context/NewApartmentContext";
 import useInput from "../../hooks/use-input";
 import { INewApartment } from "../../interfaces/interfaces";
@@ -13,7 +12,7 @@ interface IProps {
   labelStyle: string;
   type: string;
   id: string;
-  name: string | string;
+  name: string;
   label: string;
 }
 
@@ -30,30 +29,27 @@ const InputTextForm: React.FC<IProps> = (props: IProps) => {
   } = props;
   const { newApartment, setNewApartment } = useContext(NewApartmentContext);
 
-  const elementToInit = "";
-  //   const validator = (value: string) => /^\d+$/.test(value) && +value > 0;
-  const shit = name.toLowerCase() as keyof INewApartment;
+  const nameLoweredCased = name.toLowerCase() as keyof INewApartment;
   const {
     value,
     isValid,
     notifyInvalidValue,
     inputSettingsChangeHandler,
     inputBlur,
-  } = useInput(validator, String(newApartment[shit]));
-
-  //   const onChangingElement = () => {
-  //     //   inputSettingsChangeHandler;
-  //     inputSettingsChangeHandler;
-  //     setNewApartment({ ...newApartment, street: value });
-  //   };
+  } = useInput(
+    validator,
+    newApartment[nameLoweredCased] ? String(newApartment[nameLoweredCased]) : ""
+  );
 
   useEffect(() => {
-    console.log(value, newApartment[shit]);
-    // if (newApartment[shit] !== value) {
-    //   console.log("hey");
-    //   setNewApartment({ ...newApartment, street: value });
-    // }
-  }, [value]);
+    if (value !== newApartment[nameLoweredCased] && isValid) {
+      const element = { ...newApartment };
+      if (nameLoweredCased !== "comments") {
+        element[nameLoweredCased] = value;
+      }
+      setNewApartment(element);
+    }
+  }, [value, newApartment]);
 
   const taxInputProp = {
     type: type,

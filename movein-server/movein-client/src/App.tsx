@@ -72,17 +72,16 @@ function App() {
   };
 
   const ApartmentsRoutes = () => (
-    <NewApartmentProvider>
-      <Switch>
-        <Route path="/apartments/newapartment">
+    <Switch>
+      <Route path="/apartments/newapartment">
+        <NewApartmentProvider>
           <NewApartment />
-        </Route>
-
-        <Route path="*">
-          <Apartments />
-        </Route>
-      </Switch>
-    </NewApartmentProvider>
+        </NewApartmentProvider>
+      </Route>
+      <Route path="*">
+        <Apartments />
+      </Route>
+    </Switch>
   );
 
   return (

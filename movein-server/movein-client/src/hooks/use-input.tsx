@@ -7,15 +7,15 @@ interface IEnteredValue {
 
 const useInput = (validateInput: Function, initValue?: string) => {
   const [inputSettings, setInputSettings] = useState<IEnteredValue>({
-    enteredValue: "",
+    enteredValue: initValue ? initValue : "",
     enteredValueTouched: false,
   });
 
-  useEffect(() => {
-    setInputSettings((prevState) => {
-      return { ...prevState, enteredValue: initValue ? initValue : "" };
-    });
-  }, [initValue]);
+  // useEffect(() => {
+  //   setInputSettings((prevState) => {
+  //     return { ...prevState, enteredValue: initValue ? initValue : "" };
+  //   });
+  // }, [initValue]);
 
   const isEnteredValueValid = validateInput(inputSettings.enteredValue);
 
