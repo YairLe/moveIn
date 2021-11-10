@@ -28,8 +28,11 @@ const InputTextForm: React.FC<IProps> = (props: IProps) => {
     labelStyle,
   } = props;
   const { newApartment, setNewApartment } = useContext(NewApartmentContext);
+  const nameLoweredCased =
+    name === "floorMin" || name === "floorMax"
+      ? name
+      : (name.toLowerCase() as keyof INewApartment);
 
-  const nameLoweredCased = name.toLowerCase() as keyof INewApartment;
   const {
     value,
     isValid,
@@ -42,14 +45,26 @@ const InputTextForm: React.FC<IProps> = (props: IProps) => {
   );
 
   useEffect(() => {
-    if (value !== newApartment[nameLoweredCased] && isValid) {
+    if (value != newApartment[nameLoweredCased]) {
       const element = { ...newApartment };
-      if (nameLoweredCased !== "comments") {
-        element[nameLoweredCased] = value;
+      switch (nameLoweredCased) {
+        case "street":
+        case "neighborhood":
+        case "city":
+          element[nameLoweredCased] = isValid ? value : "";
+          break;
+        case "photos":
+        case "comments":
+          break;
+
+        default:
+          element[nameLoweredCased] = isValid ? Number(value) : -10;
+          break;
       }
+
       setNewApartment(element);
     }
-  }, [value, newApartment]);
+  }, [value]);
 
   const taxInputProp = {
     type: type,
@@ -58,7 +73,7 @@ const InputTextForm: React.FC<IProps> = (props: IProps) => {
     }`,
     id: id,
     name: name,
-    value: value,
+    value: Number(value) === -10 ? "" : value,
     onChange: inputSettingsChangeHandler,
     onBlur: inputBlur,
     min: 0,
