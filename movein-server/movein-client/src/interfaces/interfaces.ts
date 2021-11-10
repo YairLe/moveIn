@@ -15,12 +15,12 @@ export interface INewApartment {
   street: string
   neighborhood: string
   city: string
-  rent: string
-  tax: string
-  committee: string
-  rooms: string
-  floorMin: string
-  floorMax: string
+  rent: number
+  tax: number
+  committee: number
+  rooms: number
+  floorMin: number
+  floorMax: number
   comments: string[];
   photos: string,
 
