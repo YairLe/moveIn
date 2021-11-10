@@ -31,8 +31,8 @@ const NewApartmentSecondPage: React.FC = () => {
       <div className={styles.inputDivSecondPage}>
         <InputTextForm
           {...inputTextProp}
-          id="FloorMin"
-          name="FloorMin"
+          id="floorMin"
+          name="floorMin"
           label="Floor"
           type="number"
           inputStyle={styles.inputFloor}
@@ -40,8 +40,8 @@ const NewApartmentSecondPage: React.FC = () => {
         />
         <InputTextForm
           {...inputTextProp}
-          id="FloorMax"
-          name="FloorMax"
+          id="floorMax"
+          name="floorMax"
           label="out of"
           type="number"
           inputStyle={styles.inputFloor}

@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useCookies } from "react-cookie";
+import { NewApartmentContext } from "../../context/NewApartmentContext";
+import UseAxios from "../../hooks/use-axios";
 import newApartmentLogo from "../../images/NewApartment.svg";
+import { INewApartment } from "../../interfaces/interfaces";
 import ChangePageButton from "../Button/ChangePageButton";
 import SaveButton from "../Button/SaveButton";
 import Header from "../Header/Header";
@@ -14,6 +18,47 @@ const NewApartment: React.FC<IProps> = (props: IProps) => {
   const MIN_PAGE = 1;
   const MAX_PAGE = 3;
   const [pageNumber, setPageNumber] = useState(MIN_PAGE);
+  const { newApartment, setNewApartment } = useContext(NewApartmentContext);
+
+  const [cookies] = useCookies(["token"]);
+  const isShit = Object.keys(newApartment).every((key) => {
+    const shit = key as keyof INewApartment;
+    if (shit === "comments" || shit === "photos") {
+      return true;
+    }
+    return newApartment[shit] != "" && newApartment[shit] != -10;
+  });
+  console.log("finally printing", isShit);
+  const { loading, fetchData } = UseAxios({
+    method: "post",
+    url: "/newApartment",
+  });
+
+  const getdata = async () => {
+    const response = await fetchData(
+      { ...newApartment },
+      {
+        Authorization: `Bearer ${cookies.token}`,
+        // "Content-type": "application/json",
+      }
+    );
+    console.log(response.data);
+    // if (response.data) {
+    //   switch (response.data.message) {
+    //     case "No requirements found for user":
+    //       alert("make sure to insert data!");
+    //       break;
+    //     case "User requirement retrived":
+    //       localStorage.setItem(
+    //         "requirements",
+    //         JSON.stringify(response.data.data)
+    //       );
+
+    //       setRequirements(response.data.data);
+    //       break;
+    //   }
+    // }
+  };
 
   const changePage = () => {
     switch (pageNumber) {
@@ -96,10 +141,15 @@ const NewApartment: React.FC<IProps> = (props: IProps) => {
             )}
           </div>
         </div>
-        <form>
-          {changePage()}
-          <SaveButton buttonDisabled={true} />
-        </form>
+        {/* <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            getdata();
+          }}
+        > */}
+        {changePage()}
+        {/* <SaveButton buttonDisabled={!isShit} />
+        </form> */}
       </div>
     </React.Fragment>
   );

@@ -9,14 +9,14 @@ const initialNewApartment = {
   street: "",
   neighborhood: "",
   city: "",
-  rent: "",
-  tax: "",
-  committee: "",
-  rooms: "",
-  floorMin: "",
-  floorMax: "",
+  rent: -10,
+  tax: -10,
+  committee: -10,
+  rooms: -10,
+  floorMin: -10,
+  floorMax: -10,
   comments: [""],
-  photos: "",
+  photos: "empty",
 };
 
 const NewApartmentContext = React.createContext({
