@@ -10,10 +10,10 @@ const UseAxios = (props: IProps) => {
   // const baseUrl = "https://moveinys.herokuapp.com";
   const baseUrl = "http://localhost:8080";
   const { url, method } = props;
-
   const [loading, setLoading] = useState<boolean>(false);
   const newMethod = method.toUpperCase() as Method;
   const fetchData = async (body?: Object, headers?: any) => {
+    console.log(body, "sending body");
     try {
       const result = await axios({
         method: newMethod,

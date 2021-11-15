@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { NewApartmentContext } from "../../../context/NewApartmentContext";
 import UseAxios from "../../../hooks/use-axios";
@@ -24,15 +24,17 @@ const NewApartmentThirdPage: React.FC = () => {
   });
 
   const getdata = async () => {
-    const response = await fetchData(
-      { imgValue },
-      {
-        Authorization: `Bearer ${cookies.token}`,
-        enctype: "multipart/form-data",
-        // "Content-type": "application/json",
-      }
-    );
-    console.log(response.data);
+    console.log(imgValue, "the form data is");
+    const formData = new FormData();
+    formData.append("files", imgValue);
+    const response = await fetchData(formData, {
+      Authorization: `Bearer ${cookies.token}`,
+      // encType: "multipart/form-data",
+      ContentType: `multipart/form-data`,
+      // "Content-Type": "multipart/form-data",
+      // "Content-type": "application/json",
+    });
+    // console.log(response.data);
     // if (response.data) {
     //   switch (response.data.message) {
     //     case "No requirements found for user":
@@ -70,23 +72,47 @@ const NewApartmentThirdPage: React.FC = () => {
   //   };
 
   const changeFile: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    console.log(event.target.value);
+    console.log(event, "printing event");
     const element = { ...newApartment };
     element.photos = event.target.value;
     // setNewApartment(element);
-    setImgValue(event.target.value);
+    console.log(
+      event.target.files ? event.target.files[0] : null,
+      "changed file"
+    );
+    setImgValue(event.target.files ? event.target.files[0] : null);
     // setInputSettings((prevState) => {
     //   return { ...prevState, enteredValue: event.target.value };
     // });
   };
+
+  useEffect(() => {
+    console.log(imgValue);
+    if (imgValue) {
+      console.log(imgValue, "the image value is");
+      getdata();
+    }
+  }, [imgValue]);
+
   console.log(newApartment);
   //   console.log("value is", value);
   return (
     <React.Fragment>
+      {/* <form
+        action="http://localhost:8080/upload"
+        encType="multipart/form-data"
+        method="POST"
+      >
+        <input type="file" name="pic" />
+        <input type="submit" value="Upload a file" />
+      </form> */}
       <form
+        // action="http://localhost:8080/upload"
+        // encType="multipart/form-data"
+        // method="POST"
         onSubmit={(event) => {
           event.preventDefault();
-          getdata();
+          // getdata();
         }}
       >
         <div className={styles.inputDiv}>
@@ -94,20 +120,10 @@ const NewApartmentThirdPage: React.FC = () => {
             type="file"
             name="pic"
             multiple={false}
-            value={imgValue}
+            // value={imgValue}
             id="fileUpload"
             onChange={changeFile}
           />
-
-          {/* <InputTextForm
-          {...inputTextProp}
-          id="Rooms"
-          name="Rooms"
-          label="Rooms"
-          type="number"
-          inputStyle={styles.input}
-          labelStyle={styles.label}
-        /> */}
         </div>
         <SaveButton buttonDisabled={false} />
       </form>
