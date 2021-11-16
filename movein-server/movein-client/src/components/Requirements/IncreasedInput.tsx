@@ -29,13 +29,13 @@ const IncreasedInput: React.FC<IProps> = (props: IProps) => {
   const inputListProp = {
     type: "text",
     onChange: handleInputChange,
-    placeholder: placeholder,
+    placeholder,
     className: styles.inputList,
   };
 
   useEffect(() => {
     const element = { ...newApartment };
-    element["comments"] =
+    element.comments =
       inputList.length !== 1
         ? inputList.filter((value) => value !== "")
         : inputList;
@@ -63,7 +63,7 @@ const IncreasedInput: React.FC<IProps> = (props: IProps) => {
               <Input
                 inputProp={{
                   ...inputListProp,
-                  value: value,
+                  value,
                   id: `${key}`,
                   name: `input${key}`,
                 }}

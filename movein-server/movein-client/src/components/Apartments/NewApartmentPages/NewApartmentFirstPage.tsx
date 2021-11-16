@@ -61,7 +61,7 @@ const NewApartmentFirstPage: React.FC = () => {
           {...inputNumberProp}
           id="Tax"
           name="Tax"
-          label={`Property tax 
+          label={`Property tax
           -2 months`}
           type="number"
         />
@@ -71,7 +71,7 @@ const NewApartmentFirstPage: React.FC = () => {
           {...inputNumberProp}
           id="Committee"
           name="Committee"
-          label={`House 
+          label={`House
           Committee`}
           type="number"
         />

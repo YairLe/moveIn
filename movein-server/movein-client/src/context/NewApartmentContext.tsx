@@ -37,7 +37,7 @@ const NewApartmentProvider: React.FC<IProps> = (props: IProps) => {
   };
 
   const values = {
-    newApartment: newApartment,
+    newApartment,
     setNewApartment: (elementsToChange: INewApartment) =>
       changeRequirementsState(elementsToChange),
   };

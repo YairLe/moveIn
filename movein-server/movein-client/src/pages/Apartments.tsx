@@ -9,7 +9,7 @@ import styles from "./Apartment.module.css";
 
 const Apartments: React.FC = () => {
   const streets = ["Saifan", "Hanneviaim", "Hemda"];
-  //each street here has an id and photos ..
+  // each street here has an id and photos ..
   // on cube pressing enter will move to apartment page and
   // fetch it's data using the id
   const history = useHistory();
