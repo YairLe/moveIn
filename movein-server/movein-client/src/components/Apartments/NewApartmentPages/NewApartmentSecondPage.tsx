@@ -12,7 +12,6 @@ const NewApartmentSecondPage: React.FC = () => {
   const validator = (value: string) => /^\d+$/.test(value) && +value > 0;
 
   const inputTextProp = {
-    inputInvalidStyle: styles.inputInvalid,
     validator: validator,
   };
   return (
@@ -26,6 +25,7 @@ const NewApartmentSecondPage: React.FC = () => {
           type="number"
           inputStyle={styles.input}
           labelStyle={styles.label}
+          inputInvalidStyle={styles.inputInvalid}
         />
       </div>
       <div className={styles.inputDivSecondPage}>
@@ -37,6 +37,7 @@ const NewApartmentSecondPage: React.FC = () => {
           type="number"
           inputStyle={styles.inputFloor}
           labelStyle={styles.labelFloor}
+          inputInvalidStyle={styles.inputInvalidFloor}
         />
         <InputTextForm
           {...inputTextProp}
@@ -46,6 +47,7 @@ const NewApartmentSecondPage: React.FC = () => {
           type="number"
           inputStyle={styles.inputFloor}
           labelStyle={styles.labelFloor}
+          inputInvalidStyle={styles.inputInvalidFloor}
         />
       </div>
 
