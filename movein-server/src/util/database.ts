@@ -13,8 +13,8 @@ const sequelize = new Sequelize(
         rejectUnauthorized: false,
       },
     },
+    logging: false,
   },
 );
-// const sequelize = new Sequelize(process.env.CONNECTION_URI);
 
 export default sequelize;
