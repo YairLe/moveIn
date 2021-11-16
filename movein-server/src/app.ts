@@ -12,7 +12,7 @@ import Images from "./models/Images";
 import Apartments from "./models/Apartments";
 const app = express();
 const port = process.env.PORT || 5000;
-const fileUpload = require("express-fileupload");
+import fileUpload from "express-fileupload";
 app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

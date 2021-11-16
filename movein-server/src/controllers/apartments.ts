@@ -15,7 +15,7 @@ export const addNewApartment = async (
       req.files.files.length > 1 ? req.files.files : [req.files.files];
 
     const newApartment = new Apartments({
-      userId: userId,
+      userId,
       ...dataToUpdate,
       createdAt: new Date(),
       updatedAt: new Date(),

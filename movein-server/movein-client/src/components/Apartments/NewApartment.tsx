@@ -29,9 +29,9 @@ const NewApartment: React.FC = () => {
       return true;
     }
     return (
-      newApartment[newApartmentKeys] != "" &&
-      newApartment[newApartmentKeys] != -10 &&
-      newApartment[newApartmentKeys] != "empty"
+      String(newApartment[newApartmentKeys]) !== "" &&
+      Number(newApartment[newApartmentKeys]) !== -10 &&
+      String(newApartment[newApartmentKeys]) !== "empty"
     );
   });
   const { loading, fetchData } = UseAxios({

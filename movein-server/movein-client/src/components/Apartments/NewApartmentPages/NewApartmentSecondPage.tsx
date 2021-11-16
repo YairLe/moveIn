@@ -12,7 +12,7 @@ const NewApartmentSecondPage: React.FC = () => {
   const validator = (value: string) => /^\d+$/.test(value) && +value > 0;
 
   const inputTextProp = {
-    validator: validator,
+    validator,
   };
   return (
     <React.Fragment>

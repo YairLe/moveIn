@@ -41,7 +41,9 @@ const InputTextForm: React.FC<IProps> = (props: IProps) => {
     inputBlur,
   } = useInput(
     validator,
-    newApartment[nameLoweredCased] ? String(newApartment[nameLoweredCased]) : ""
+    newApartment[nameLoweredCased]
+      ? String(newApartment[nameLoweredCased])
+      : "",
   );
 
   useEffect(() => {
@@ -67,12 +69,12 @@ const InputTextForm: React.FC<IProps> = (props: IProps) => {
   }, [value]);
 
   const taxInputProp = {
-    type: type,
+    type,
     className: `${styles.taxInputProperty} ${
       notifyInvalidValue ? inputInvalidStyle : inputStyle
     }`,
-    id: id,
-    name: name,
+    id,
+    name,
     value: Number(value) === -10 ? "" : value,
     onChange: inputSettingsChangeHandler,
     onBlur: inputBlur,
