@@ -83,7 +83,7 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
         case 200: {
           const responseData = response.data;
           const { userName, userId, exp } = jwt.decode(
-            responseData.token,
+            responseData.token
           ) as any;
           const expirationTime = exp * 1000;
           const expirationDate = new Date(expirationTime);
@@ -101,7 +101,7 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
             },
             {
               expires: expirationDate,
-            },
+            }
           );
 
           break;
@@ -109,6 +109,8 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
         case 201: {
           alert(response.data.message);
           resetUsername();
+          resetpasswordConfirmation();
+          resetPassword();
           break;
         }
         default: {
@@ -116,9 +118,6 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
         }
       }
     }
-
-    resetpasswordConfirmation();
-    resetPassword();
   };
 
   useEffect(() => {

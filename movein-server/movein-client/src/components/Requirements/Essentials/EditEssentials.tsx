@@ -1,5 +1,6 @@
 import React from "react";
 import AreaLogo from "../../../images/Essentials.svg";
+import EditButton from "../../Button/EditButton";
 import Header from "../../Header/Header";
 import HeaderComponent from "../HeaderComponent";
 import styles from "./EditEssentials.module.css";
@@ -15,6 +16,7 @@ const EditEssentials: React.FC = () => {
           <HeaderComponent
             editButtonStyle={styles.editButton}
             headerStyle={styles.div}
+            element={<EditButton handleClick={() => {}} />}
           />
         }
       />

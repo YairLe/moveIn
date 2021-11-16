@@ -1,5 +1,6 @@
 import React from "react";
 import RoomsLogo from "../../../images/Rooms.svg";
+import EditButton from "../../Button/EditButton";
 import Header from "../../Header/Header";
 import HeaderComponent from "../HeaderComponent";
 import styles from "./EditRooms.module.css";
@@ -15,6 +16,7 @@ const EditRooms: React.FC = () => {
           <HeaderComponent
             editButtonStyle={styles.editButton}
             headerStyle={styles.div}
+            element={<EditButton handleClick={() => {}} />}
           />
         }
       />

@@ -3,13 +3,13 @@ import Button from "./Button";
 import styles from "./AddButton.module.css";
 
 interface IProps {
-  handleAddClick: React.MouseEventHandler<HTMLButtonElement>;
-  divStyle: string;
-  buttonStyle: string;
+  handleAddClick?: React.MouseEventHandler<HTMLButtonElement>;
+  divStyle?: string;
+  buttonStyle?: string;
 }
 
 const AddButton: React.FC<IProps> = (props: IProps) => {
-  const { handleAddClick, divStyle, buttonStyle } = props;
+  const { handleAddClick = () => {}, divStyle, buttonStyle } = props;
   return (
     <div className={divStyle}>
       <Button

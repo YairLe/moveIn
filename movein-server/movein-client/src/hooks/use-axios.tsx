@@ -7,13 +7,14 @@ interface IProps {
 }
 
 const UseAxios = (props: IProps) => {
-  const baseUrl = "https://moveinys.herokuapp.com";
+  // const baseUrl = "https://moveinys.herokuapp.com";
+  const baseUrl = "http://localhost:5000";
   const { url, method } = props;
-
   const [loading, setLoading] = useState<boolean>(false);
   const newMethod = method.toUpperCase() as Method;
   const fetchData = async (body?: Object, headers?: any) => {
     try {
+      setLoading(true);
       const result = await axios({
         method: newMethod,
         url: `${baseUrl}${url ? url : ""}`,

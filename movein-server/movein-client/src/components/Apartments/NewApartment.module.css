@@ -1,0 +1,77 @@
+.header {
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  padding-bottom: 1rem;
+}
+
+.div {
+  display: flex;
+  width: 95%;
+  height: 4rem;
+  flex-direction: row;
+  align-items: center;
+}
+
+.editButton {
+  align-items: center;
+  display: flex;
+}
+
+.label,
+.labelFloor {
+  color: #22414a;
+  font-family: "Denk One", sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  white-space: pre-line;
+}
+
+.label {
+  width: 12rem;
+  padding-right: 1rem;
+}
+.inputDiv {
+  display: flex;
+  width: 90%;
+  padding-left: 0.5rem;
+  height: 4rem;
+  align-items: center;
+}
+
+.inputDivSecondPage {
+  display: flex;
+  width: 90%;
+  padding-left: 0.5rem;
+  height: 4rem;
+  align-items: center;
+}
+
+.labelFloor {
+  width: 5rem;
+}
+
+.inputFloor,
+.inputInvalidFloor {
+  display: flex;
+  height: 50%;
+  padding-right: 1rem;
+  margin-right: 0.1rem;
+  border: 0;
+  width: 4rem;
+}
+
+.inputInvalidFloor,
+.inputInvalid {
+  background-color: #c78890;
+}
+
+.input,
+.inputInvalid {
+  height: 50%;
+  margin-top: 0.5rem;
+  border: 0;
+  width: 8rem;
+}

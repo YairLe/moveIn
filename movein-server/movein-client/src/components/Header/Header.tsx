@@ -13,7 +13,7 @@ const Header: React.FC<IProps> = (props: IProps) => {
       {element}
       <img
         src={image}
-        style={{ height: element ? "3rem" : "6rem", pointerEvents: "none" }}
+        style={{ height: element ? "3.5rem" : "6rem", pointerEvents: "none" }}
         alt="logo"
       />
     </header>

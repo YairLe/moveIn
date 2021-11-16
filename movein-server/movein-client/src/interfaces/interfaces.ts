@@ -9,3 +9,19 @@ export interface IRequirements {
   maxRooms: number;
   essentials: string[];
 }
+
+export interface INewApartment {
+
+  street: string
+  neighborhood: string
+  city: string
+  rent: number
+  tax: number
+  committee: number
+  rooms: number
+  floorMin: number
+  floorMax: number
+  comments: string[];
+  photos: string,
+
+}
