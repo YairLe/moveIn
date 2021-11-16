@@ -13,8 +13,8 @@ const UseAxios = (props: IProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const newMethod = method.toUpperCase() as Method;
   const fetchData = async (body?: Object, headers?: any) => {
-    console.log(body, "sending body");
     try {
+      setLoading(true);
       const result = await axios({
         method: newMethod,
         url: `${baseUrl}${url ? url : ""}`,

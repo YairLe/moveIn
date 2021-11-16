@@ -11,7 +11,8 @@ export const addNewApartment = async (
   try {
     const userId = req.userId;
     const dataToUpdate = JSON.parse(req.body.json);
-    const images = req.files;
+    const images =
+      req.files.files.length > 1 ? req.files.files : [req.files.files];
 
     const newApartment = new Apartments({
       userId: userId,
@@ -25,7 +26,8 @@ export const addNewApartment = async (
     const apartmentName = newApartmentAfterSave.dataValues.street;
 
     const objectToSend: any = [];
-    images.files.forEach((file: any) => {
+
+    images.forEach((file: any) => {
       objectToSend.push({
         name: file.name,
         userId,
