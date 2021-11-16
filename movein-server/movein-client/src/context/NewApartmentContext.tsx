@@ -26,9 +26,7 @@ const NewApartmentContext = React.createContext({
 
 const NewApartmentProvider: React.FC<IProps> = (props: IProps) => {
   const { children } = props;
-  //   const data = localStorage.getItem("requirements")
-  //     ? JSON.parse(localStorage.getItem("requirements") as string)
-  //     : initialRequirements;
+
   const [newApartment, setNewApartment] =
     useState<INewApartment>(initialNewApartment);
 
@@ -37,7 +35,7 @@ const NewApartmentProvider: React.FC<IProps> = (props: IProps) => {
   };
 
   const values = {
-    newApartment: newApartment,
+    newApartment,
     setNewApartment: (elementsToChange: INewApartment) =>
       changeRequirementsState(elementsToChange),
   };

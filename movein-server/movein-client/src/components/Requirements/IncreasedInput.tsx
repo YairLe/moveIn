@@ -34,12 +34,12 @@ const IncreasedInput: React.FC<IProps> = (props: IProps) => {
   };
 
   useEffect(() => {
-    const element = { ...newApartment };
-    element["comments"] =
+    const apartmentElement = { ...newApartment };
+    apartmentElement.comments =
       inputList.length !== 1
         ? inputList.filter((value) => value !== "")
         : inputList;
-    setNewApartment(element);
+    setNewApartment(apartmentElement);
   }, [inputList]);
 
   return (
