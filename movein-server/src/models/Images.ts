@@ -8,6 +8,10 @@ const Images = db.define("image", {
     primaryKey: true,
     autoIncrement: true,
   },
+  userId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
   name: {
     type: Sequelize.TEXT,
     allowNull: true,
