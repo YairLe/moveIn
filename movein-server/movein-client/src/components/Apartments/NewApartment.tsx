@@ -39,7 +39,7 @@ const NewApartment: React.FC = () => {
     url: "/newApartment",
   });
 
-  const getdata = async () => {
+  const sendData = async () => {
     const formData = new FormData();
     Object.keys(newApartment.photos).forEach((key: any) => {
       const newApartmentKeys = key as keyof {};
@@ -104,7 +104,7 @@ const NewApartment: React.FC = () => {
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            getdata();
+            sendData();
           }}
         >
           {changePage()}
