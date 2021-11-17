@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
 import AddButton from "../components/Button/AddButton";
 import Button from "../components/Button/Button";
 import Header from "../components/Header/Header";
 import HeaderComponent from "../components/Requirements/HeaderComponent";
+import UseAxios from "../hooks/use-axios";
 import ApartmentLogo from "../images/Apartments.svg";
 import styles from "./Apartment.module.css";
 
@@ -13,10 +15,28 @@ const Apartments: React.FC = () => {
   // on cube pressing enter will move to apartment page and
   // fetch it's data using the id
   const history = useHistory();
+  const [cookies] = useCookies(["token"]);
+  const { loading, fetchData } = UseAxios({
+    method: "get",
+    url: "/getUserApartments",
+  });
 
   const handleButtonClick = () => {
     history.push("apartments/newapartment");
   };
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetchData(
+        {},
+        {
+          Authorization: `Bearer ${cookies.token}`,
+        },
+      );
+      console.log("result is", response);
+    };
+    getData();
+  }, []);
 
   return (
     <React.Fragment>
