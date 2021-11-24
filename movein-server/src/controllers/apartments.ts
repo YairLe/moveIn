@@ -61,7 +61,6 @@ export const getUserApartments = async (
 ) => {
   try {
     const userId = req.userId;
-    console.log("im trying to do it");
     let result = await Apartments.findAll({
       where: { userId },
       attributes: ["street", ["id", "apartmentId"]],

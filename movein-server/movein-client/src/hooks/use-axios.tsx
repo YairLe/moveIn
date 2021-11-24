@@ -8,7 +8,7 @@ interface IProps {
 
 const UseAxios = (props: IProps) => {
   // const baseUrl = "https://moveinys.herokuapp.com";
-  const baseUrl = "http://localhost:5000";
+  const baseUrl = "http://localhost:8080";
   const { url, method } = props;
   const [loading, setLoading] = useState<boolean>(false);
   const newMethod = method.toUpperCase() as Method;
