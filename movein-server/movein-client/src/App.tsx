@@ -3,6 +3,7 @@ import { useCookies } from "react-cookie";
 //@ts-ignore
 import { Redirect, Route, Switch } from "react-router-dom";
 import NewApartment from "./components/Apartments/NewApartment";
+import ApartmentView from "./components/Apartments/NewApartmentPages/ApartmentView";
 import Auth from "./components/Auth/Auth";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
 import { EditProvider } from "./context/EditContext";
@@ -76,6 +77,11 @@ function App() {
       <Route path="/apartments/newapartment">
         <NewApartmentProvider>
           <NewApartment />
+        </NewApartmentProvider>
+      </Route>
+      <Route path="/apartments/:apartmentId">
+        <NewApartmentProvider>
+          <ApartmentView />
         </NewApartmentProvider>
       </Route>
       <Route path="*">
