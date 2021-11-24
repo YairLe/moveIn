@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
 import AddButton from "../components/Button/AddButton";
@@ -10,10 +10,7 @@ import ApartmentLogo from "../images/Apartments.svg";
 import styles from "./Apartment.module.css";
 
 const Apartments: React.FC = () => {
-  const streets = ["Saifan", "Hanneviaim", "Hemda"];
-  //each street here has an id and photos ..
-  // on cube pressing enter will move to apartment page and
-  // fetch it's data using the id
+  const [apartmentsData, setApartmentsData] = useState<any>([]);
   const history = useHistory();
   const [cookies] = useCookies(["token"]);
   const { loading, fetchData } = UseAxios({
@@ -25,15 +22,29 @@ const Apartments: React.FC = () => {
     history.push("apartments/newapartment");
   };
 
+  const navigateToApartment = (apartmentId: string) => {
+    history.push(`apartments/${apartmentId}`);
+  };
+
   useEffect(() => {
     const getData = async () => {
       const response = await fetchData(
         {},
         {
           Authorization: `Bearer ${cookies.token}`,
-        },
+        }
       );
-      console.log("result is", response);
+
+      const newData = response.data.map((apartment: any) => {
+        const data = { ...apartment };
+        //@ts-ignore
+        data["images.image"].data = new Buffer.from(
+          data["images.image"].data
+        ).toString("base64");
+        return data;
+      });
+
+      setApartmentsData(newData);
     };
     getData();
   }, []);
@@ -57,15 +68,9 @@ const Apartments: React.FC = () => {
           />
         }
       />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        {streets.map((street, key) => (
+
+      <div className={styles.apartmentsDiv}>
+        {Object.keys(apartmentsData).map((objectKey: any) => (
           <div
             style={{
               width: "100%",
@@ -73,23 +78,13 @@ const Apartments: React.FC = () => {
               alignItems: "center",
               display: "flex",
             }}
-            key={key}
+            key={objectKey}
           >
             <Button
               buttonProp={{
-                style: {
-                  justifyContent: "center",
-                  backgroundColor: "#155766",
-                  height: "8rem",
-                  alignItems: "center",
-                  display: "flex",
-                  width: "80%",
-                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                  flexDirection: "column",
-                  padding: "0",
-                  border: "transparent ",
-                  marginBottom: "1rem",
-                },
+                className: styles.navigateButton,
+                onClick: () =>
+                  navigateToApartment(apartmentsData[objectKey].apartmentId),
                 //   onClick: click moves to apartment page
               }}
             >
@@ -99,11 +94,14 @@ const Apartments: React.FC = () => {
                   backgroundColor: "#249eb9",
                   alignItems: "center",
                   display: "flex",
-                  width: "90%",
                   height: "70%",
                 }}
               >
-                hey
+                <img
+                  style={{ height: "100%", aspectRatio: "16/9" }}
+                  src={`data:image/jpeg;base64,${apartmentsData[objectKey]["images.image"].data}`}
+                  alt="fuckyou"
+                />
               </div>
               <div
                 style={{
@@ -114,7 +112,7 @@ const Apartments: React.FC = () => {
                   //   font-family: "Raleway", sans-serif;
                 }}
               >
-                {street}
+                {apartmentsData[objectKey].street}
               </div>
             </Button>
           </div>
