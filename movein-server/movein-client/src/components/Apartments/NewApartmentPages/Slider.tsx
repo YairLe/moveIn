@@ -40,6 +40,7 @@ const Slider: React.FC<IProps> = (props: IProps) => {
                 style={{
                   listStyle: "none",
                   width: "100%",
+                  aspectRatio: "16/9",
                 }}
                 alt={`Slide ${key}`}
               />
