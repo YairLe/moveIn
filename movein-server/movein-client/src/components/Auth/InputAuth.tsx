@@ -113,8 +113,12 @@ const InputAuth: React.FC<IProps> = (props: IProps) => {
           resetPassword();
           break;
         }
-        default: {
+        case 401: {
           alert("Wrong Username or Password");
+          break;
+        }
+        default: {
+          alert("An error occured");
         }
       }
     }
