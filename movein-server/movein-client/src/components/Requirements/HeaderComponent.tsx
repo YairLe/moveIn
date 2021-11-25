@@ -1,8 +1,6 @@
 import React from "react";
 //@ts-ignore
 import { useHistory, useLocation } from "react-router-dom";
-import AddButton from "../Button/AddButton";
-import EditButton from "../Button/EditButton";
 import ReturnButton from "../Button/ReturnButton";
 
 interface IProps {

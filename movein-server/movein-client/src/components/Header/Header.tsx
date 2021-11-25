@@ -3,7 +3,7 @@ import React from "react";
 interface IProps {
   headerStyle?: string;
   element?: React.ReactNode;
-  image: string;
+  image?: string;
 }
 
 const Header: React.FC<IProps> = (props: IProps) => {
@@ -11,11 +11,13 @@ const Header: React.FC<IProps> = (props: IProps) => {
   return (
     <header className={headerStyle}>
       {element}
-      <img
-        src={image}
-        style={{ height: element ? "3.5rem" : "6rem", pointerEvents: "none" }}
-        alt="logo"
-      />
+      {image && (
+        <img
+          src={image}
+          style={{ height: element ? "3.5rem" : "6rem", pointerEvents: "none" }}
+          alt="logo"
+        />
+      )}
     </header>
   );
 };
