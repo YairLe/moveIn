@@ -19,7 +19,7 @@ const NewApartment: React.FC = () => {
   const MIN_PAGE = 1;
   const MAX_PAGE = 3;
   const [pageNumber, setPageNumber] = useState(MIN_PAGE);
-  const { newApartment, setNewApartment } = useContext(NewApartmentContext);
+  const { newApartment } = useContext(NewApartmentContext);
   const history = useHistory();
 
   const [cookies] = useCookies(["token"]);
