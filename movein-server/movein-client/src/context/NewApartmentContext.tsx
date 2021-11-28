@@ -30,14 +30,14 @@ const NewApartmentProvider: React.FC<IProps> = (props: IProps) => {
   const [newApartment, setNewApartment] =
     useState<INewApartment>(initialNewApartment);
 
-  const changeRequirementsState = (elementsToChange: INewApartment) => {
+  const changeNewApartmentsState = (elementsToChange: INewApartment) => {
     setNewApartment(elementsToChange);
   };
 
   const values = {
     newApartment,
     setNewApartment: (elementsToChange: INewApartment) =>
-      changeRequirementsState(elementsToChange),
+      changeNewApartmentsState(elementsToChange),
   };
   return (
     <NewApartmentContext.Provider value={values}>
