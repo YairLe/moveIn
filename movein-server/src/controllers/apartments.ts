@@ -1,4 +1,5 @@
 import { NextFunction, Response } from "express";
+import Sequelize from "sequelize";
 import errorCode from "../errors/errorCode";
 import Apartments from "../models/Apartments";
 import Images from "../models/Images";
@@ -63,14 +64,17 @@ export const getUserApartments = async (
     const userId = req.userId;
     let result = await Apartments.findAll({
       where: { userId },
-      attributes: ["street", ["id", "apartmentId"]],
+      attributes: ["street", ["id", "apartmentId"],
+      [Sequelize.literal('images.image'), 'image'],
+    ],
       raw: true,
       include: [
         {
           model: Images,
           required: true,
-          attributes: ["id", "userId", "image"],
+          attributes: [ ],
           where: { userId },
+          nest:true,
         },
       ],
     });
