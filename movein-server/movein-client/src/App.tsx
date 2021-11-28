@@ -2,28 +2,11 @@ import React, { Suspense, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 //@ts-ignore
 import { Redirect, Route, Switch } from "react-router-dom";
-import NewApartment from "./components/Apartments/NewApartment";
-import ApartmentView from "./components/Apartments/NewApartmentPages/ApartmentView";
 import Auth from "./components/Auth/Auth";
 import LoadingSpinner from "./components/LoadingSpinner/LoadingSpinner";
-import { EditProvider } from "./context/EditContext";
-import { NewApartmentProvider } from "./context/NewApartmentContext";
-
+import RoutesApartments from "./routes/RoutesApartments";
+import RoutesRequirements from "./routes/RoutesRequirements";
 const MainPage = React.lazy(() => import("./pages/MainPage"));
-const Apartments = React.lazy(() => import("./pages/Apartments"));
-const Requirements = React.lazy(() => import("./pages/Requirements"));
-const EditPrice = React.lazy(
-  () => import("./components/Requirements/Price/EditPrice")
-);
-const EditArea = React.lazy(
-  () => import("./components/Requirements/Area/EditArea")
-);
-const EditRooms = React.lazy(
-  () => import("./components/Requirements/Rooms/EditRooms")
-);
-const EditEssentials = React.lazy(
-  () => import("./components/Requirements/Essentials/EditEssentials")
-);
 
 function App() {
   const [cookies, removeCookie] = useCookies(["login", "token"]);
@@ -48,48 +31,6 @@ function App() {
     }
   }, [cookies]);
 
-  const RequirementsRoutes = () => {
-    return (
-      <EditProvider>
-        <Switch>
-          <Route path="/requirements/price">
-            <EditPrice />
-          </Route>
-          <Route path="/requirements/area">
-            <EditArea />
-          </Route>
-          <Route path="/requirements/rooms">
-            <EditRooms />
-          </Route>
-          <Route path="/requirements/essentials">
-            <EditEssentials />
-          </Route>
-          <Route path="*">
-            <Requirements />
-          </Route>
-        </Switch>
-      </EditProvider>
-    );
-  };
-
-  const ApartmentsRoutes = () => (
-    <Switch>
-      <Route path="/apartments/newapartment">
-        <NewApartmentProvider>
-          <NewApartment />
-        </NewApartmentProvider>
-      </Route>
-      <Route path="/apartments/:apartmentId">
-        <NewApartmentProvider>
-          <ApartmentView />
-        </NewApartmentProvider>
-      </Route>
-      <Route path="*">
-        <Apartments />
-      </Route>
-    </Switch>
-  );
-
   return (
     <Switch>
       <Suspense
@@ -104,8 +45,12 @@ function App() {
             <Route exact path="/main">
               <MainPage />
             </Route>
-            <Route path="/requirements">{RequirementsRoutes()}</Route>
-            <Route path="/apartments">{ApartmentsRoutes()}</Route>
+            <Route path="/requirements">
+              <RoutesRequirements />
+            </Route>
+            <Route path="/apartments">
+              <RoutesApartments />
+            </Route>
             <Route exact path="/">
               <Redirect to="/main" />
             </Route>
