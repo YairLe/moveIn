@@ -25,3 +25,9 @@ export interface INewApartment {
   photos: string,
 
 }
+
+export interface IApartments {
+  street: string;
+  apartmentId: string;
+  image: { data: any; type: any };
+}
