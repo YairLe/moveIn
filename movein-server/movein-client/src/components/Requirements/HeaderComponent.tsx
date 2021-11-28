@@ -26,7 +26,7 @@ const HeaderComponent: React.FC<IProps> = (props: IProps) => {
         break;
       case "apartments": {
         if (innerRoute) {
-          history.push("/apartments");
+          history.push("/apartments", { from: location.pathname });
         } else {
           history.push("/main");
         }
