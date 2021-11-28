@@ -11,7 +11,7 @@ import path from "path";
 import Images from "./models/Images";
 import Apartments from "./models/Apartments";
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 5000;
 import fileUpload from "express-fileupload";
 app.use(fileUpload());
 app.use(bodyParser.json());
