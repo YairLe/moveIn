@@ -26,6 +26,25 @@ const ApartmentView: React.FC = () => {
     floorMax: 5,
     comments: [""],
   };
+
+  const priceConfig: any = {
+    rent: {
+      name: "Rent",
+      element: `${3000} NIS`,
+    },
+    tax: {
+      name: "Property Tax",
+      element: `${900} NIS (2 months)`,
+    },
+    committee: {
+      name: "House Committee",
+      element: `${250} NIS`,
+    },
+    rooms: {
+      name: "Rooms",
+      element: `${3}`,
+    },
+  };
   const { loading, fetchData } = UseAxios({
     method: "get",
     url: `/getUserApartments/${apartmentParams.apartmentId}`,
@@ -40,15 +59,13 @@ const ApartmentView: React.FC = () => {
         }
       );
       //@ts-ignore
-      const shit = new Buffer.from(
-        response.data["0"]["images.image"].data
-      ).toString("base64");
+      const shit = new Buffer.from(response.data["0"].image.data).toString(
+        "base64"
+      );
       const newData = response.data.map((apartment: any) => {
         const data = { ...apartment };
         //@ts-ignore
-        data["images.image"].data = new Buffer.from(
-          data["images.image"].data
-        ).toString("base64");
+        data.image.data = new Buffer.from(data.image.data).toString("base64");
         return data;
       });
     };
@@ -69,7 +86,7 @@ const ApartmentView: React.FC = () => {
           >
             <HeaderComponent
               editButtonStyle={styles.editButton}
-              headerStyle={styles.div}
+              headerStyle={styles.headerStyle}
             />
             <div
               style={{
@@ -87,7 +104,52 @@ const ApartmentView: React.FC = () => {
           </div>
         }
       />
-      <div>hey bro</div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            justifyContent: "center",
+            backgroundColor: "#249eb9",
+            alignItems: "center",
+            display: "flex",
+            height: "70%",
+          }}
+        >
+          hey
+          {/* <img
+                      style={{ height: "100%", aspectRatio: "16/9" }}
+                      src={`data:image/jpeg;base64,${apartments[objectKey]["image"].data}`}
+                      alt="apartmentImage"
+                    /> */}
+        </div>
+        <div
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+            color: "white",
+            //   font-family: "Raleway", sans-serif;
+          }}
+        >
+          bye
+        </div>
+      </div>
+      <div className={styles.div}>
+        {Object.keys(priceConfig).map((value, key) => {
+          return (
+            <div key={key} className={styles.divElement}>
+              <strong>{priceConfig[value].name}&nbsp; </strong>
+              <p>{priceConfig[value].element}</p>
+            </div>
+          );
+        })}
+      </div>
     </React.Fragment>
   );
 };
