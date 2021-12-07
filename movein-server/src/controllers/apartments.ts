@@ -15,7 +15,7 @@ interface IApartmentObject {
 export const addNewApartment = async (
   req: any,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
   try {
     const userId = req.userId;
@@ -58,23 +58,25 @@ export const addNewApartment = async (
 export const getUserApartments = async (
   req: any,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
   try {
     const userId = req.userId;
     let result = await Apartments.findAll({
       where: { userId },
-      attributes: ["street", ["id", "apartmentId"],
-      [Sequelize.literal('images.image'), 'image'],
-    ],
+      attributes: [
+        "street",
+        ["id", "apartmentId"],
+        [Sequelize.literal("images.image"), "image"],
+      ],
       raw: true,
       include: [
         {
           model: Images,
           required: true,
-          attributes: [ ],
+          attributes: [],
           where: { userId },
-          nest:true,
+          nest: true,
         },
       ],
     });
@@ -84,18 +86,48 @@ export const getUserApartments = async (
         (
           apartmentObject: IApartmentObject,
           index: number,
-          resultArray: IApartmentObject[],
+          resultArray: IApartmentObject[]
         ) =>
           resultArray.findIndex(
             (resultApartmentObject: IApartmentObject) =>
-              resultApartmentObject.apartmentId == apartmentObject.apartmentId,
-          ) == index,
+              resultApartmentObject.apartmentId == apartmentObject.apartmentId
+          ) == index
       );
     }
 
     console.log(result);
 
     res.status(201).json(result);
+  } catch (err: any) {
+    errorCode(err, next);
+  }
+};
+
+export const getUserApartment = async (
+  req: any,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const apartmentId = req.query;
+    let result = await Apartments.findOne({
+      where: { id: apartmentId },
+      attributes: [
+        "street",
+        ["id", "apartmentId"],
+        [Sequelize.literal("images.image"), "image"],
+      ],
+      raw: true,
+      include: [
+        {
+          model: Images,
+          required: true,
+          attributes: [],
+          where: { apartmentId },
+          nest: true,
+        },
+      ],
+    });
   } catch (err: any) {
     errorCode(err, next);
   }
